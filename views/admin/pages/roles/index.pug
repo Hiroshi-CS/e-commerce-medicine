@@ -1,0 +1,19 @@
+extends ../../layouts/default.pug
+
+
+block main     
+
+  h1.mb-4 Nhóm quyền 
+
+  .card.mb-3
+    .card-header Danh sách 
+    .card-body 
+      .row 
+        .col-8 
+        .col-4.text-right 
+          a(
+            href = `${prefixAdmin}/roles/create`
+            class = `btn btn-outline-success`
+          ) + Thêm mới
+
+  script(src="/admin/js/product.js")

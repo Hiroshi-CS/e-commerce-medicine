@@ -1,5 +1,6 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug 
+include ../../mixins/select-tree.pug 
 
 block main 
   +alert-error(5000)
@@ -23,9 +24,18 @@ block main
         required
       )
     div(class = "form-group")
+      label(for="product_category_id") Danh mục
+      select(
+        name = "product_category_id"
+        id = "product_category_id"
+        class = "form-control"
+      )
+        option -- Chọn danh mục --
+        +select-tree(records,"-- ",product.product_category_id)
+    div(class = "form-group")
       label(for = "title") Mô tả
       textarea(
-        class = "form-control"
+        class = "form-control textarea-mce"
         id = "desc"
         name = "description"
         rows = "5"

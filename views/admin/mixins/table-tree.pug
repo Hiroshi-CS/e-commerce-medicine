@@ -1,0 +1,50 @@
+mixin table-tree(records, level = "-- ")
+  //- - if(!index) index = {value: 1}
+  if (records)
+    each item in records
+      tr
+        td
+          input(
+            type="checkbox"
+            name="id"
+            value=item.id
+          )
+        td #{item.index}
+        td: img(
+          src=item.thumbnail
+          alt=item.title
+          width="100px"
+          height="auto"
+        )
+        td #{level}#{item.title}
+        td
+          input(
+            type="number"
+            value=item.position
+            style="width: 60px"
+            min="1"
+            name="position"
+          )
+        td: a(
+            href="javascript:;"
+            data-status=item.status
+            data-id=item.id 
+            button-change-status
+            class=`${item.status == 'active' ? 'badge rounded-pill text-bg-success' : 'badge rounded-pill text-bg-danger'}`
+          ) #{item.status}
+        td
+          a(
+            href=`${prefixAdmin}/products/detail/${item.id}`
+            class="btn btn-secondary btn-sm"
+          ) Chi tiết
+          a(
+            href=`${prefixAdmin}/products-category/edit/${item.id}`
+            class="btn btn-warning btn-sm"
+          ) Sửa
+          button(
+            class="btn btn-danger btn-sm ml-1"
+            button-delete-restore
+            data-id=item.id
+            value=isDeleted  
+          ) #{isDeleted}
+      +table-tree(item.children, level + "-- ")

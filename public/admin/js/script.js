@@ -149,18 +149,52 @@ const uploadImage = document.querySelector("[upload-image]");
 if (uploadImage) {
   const uploadImageInput = document.querySelector("[upload-image-input]");
   const uploadImagePreview = document.querySelector("[upload-image-preview]");
-  const closeImagePreview  = document.querySelector("[close-image]");
+  const closeImagePreview = document.querySelector("[close-image]");
   uploadImageInput.addEventListener("change", (e) => {
     const file = e.target.files[0];
-    if (file){
+    if (file) {
       uploadImagePreview.src = URL.createObjectURL(file); // Tạo 1 URL tạm để hiển thị ảnh
-      closeImagePreview.style.display = "inline-block" 
+      closeImagePreview.style.display = "inline-block";
     }
   });
-  closeImagePreview.addEventListener("click", () =>{
-    uploadImageInput.value = ""
-    closeImagePreview.style.display = "none"
-    uploadImagePreview.src = ""
-  })
+  closeImagePreview.addEventListener("click", () => {
+    uploadImageInput.value = "";
+    closeImagePreview.style.display = "none";
+    uploadImagePreview.src = "";
+  });
 }
 // End Upload Image
+
+
+// Sort
+const sort = document.querySelector("[sort]");
+if (sort) {
+  let url = new URL(window.location.href);
+  const sortSelect = document.querySelector("[sort-select]");
+  const sortClear = document.querySelector("[sort-clear]");
+
+  sortSelect.addEventListener("change", (e) => {
+    const value = e.target.value;
+
+    const [sortKey, sortValue] = value.split("-");
+
+    url.searchParams.set("sortKey", sortKey);
+    url.searchParams.set("sortValue", sortValue);
+
+    window.location.href = url;
+  });
+
+  sortClear.addEventListener("click", () => {
+    url.searchParams.delete("sortKey");
+    url.searchParams.delete("sortValue");
+
+    window.location.href = url;
+  });
+  const sortKey = url.searchParams.get("sortKey");
+  const sortValue = url.searchParams.get("sortValue");
+  if(sortKey && sortValue){
+    sortSelect.value = `${sortKey}-${sortValue}`;
+    sortSelect.selected = true;
+  }
+}
+// End Sort

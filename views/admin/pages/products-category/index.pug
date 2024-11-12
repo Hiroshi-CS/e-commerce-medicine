@@ -1,0 +1,65 @@
+extends ../../layouts/default.pug
+include ../../mixins/filter-status.pug
+include ../../mixins/search.pug
+include ../../mixins/pagination.pug
+include ../../mixins/form-change-multi.pug
+include ../../mixins/alert.pug
+include ../../mixins/sort.pug 
+include ../../mixins/table-tree.pug 
+
+block main       
+
+  h1 Danh mục sản phẩm 
+
+  .card.mb-3 
+    .card-header Bộ lọc và tìm kiếm 
+    .card-body
+      .row
+        .col-6
+          +filter-status(filterStatus)
+        .col-6
+          +search(keyword)
+    .card.mb-3 
+    .card-header Sắp xếp 
+    .card-body 
+      .row 
+        .col-4 
+          +sort()
+  .card.mb-3 
+    .card-header.d-flex.justify-content-between.align-items-center
+      .left-content      
+        p Danh sách sản phẩm
+      .right-content
+        button(
+          class = "btn btn-danger"
+          id= "deleted-list"
+        ) Danh sách sản phẩm đã xóa 
+    .card-body
+      .row
+        .col-8  
+          +form-change-multi(`${prefixAdmin}/products-category/change-multi?_method=PATCH`)
+        .col-4 
+          a(
+            href=`${prefixAdmin}/products-category/create`
+            class = "btn btn-outline-success"
+            style  = "text-decoration: none"
+          ) + Thêm mới
+      table(
+        class = "table table-hover table-sm"
+        checkbox-multi
+      )
+        thead
+          tr
+            th
+              input(type="checkbox" name="checkall") 
+            th STT
+            th Hình ảnh
+            th Tiêu đề
+            th Vị trí
+            th Trạng thái 
+            th Hành động
+        tbody
+          +table-tree(records)
+//- _id
+//- title 
+//- parent_id 

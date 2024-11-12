@@ -1,9 +1,11 @@
-// import model: /model/product.model.js
+// import model:
 const Product = require("../../models/product.model");
+const ProductCategory = require("../../models/products-category.model");
 // import helper: /helper/
 const filterStatusHelper = require("../../helper/filterStatus.js");
 const searchHelper = require("../../helper/search.js");
 const paginationHelper = require("../../helper/pagination.js");
+const createTreeHelper = require("../../helper/createTree.js");
 
 const systemConfig = require("../../config/system.js");
 
@@ -53,9 +55,17 @@ module.exports.index = async (req, res) => {
     countProducts
   );
   // End Pagination
+  let sort = {};
+  // Sort
+  if (req.query.sortKey && req.query.sortValue) {
+    sort[req.query.sortKey] = req.query.sortValue;
+  } else {
+    sort.position = "desc";
+  }
+  // End Sort
 
   const products = await Product.find(find) // Thực hiện tìm kiếm trong database,trả về danh sách sản phẩm
-    .sort({ position: "desc" }) // Sắp xép sản phẩm theo giá trị position giảm dần, dùng "asc" cho tăng dần
+    .sort(sort) // Sắp xép sản phẩm theo giá trị sort
     .limit(objectPagination.limitItems) //Giới hạn số sản phẩm 1 trang
     .skip(objectPagination.skip); //Số sản phẩm bỏ qua
   res.render("admin/pages/products/index", {
@@ -171,8 +181,15 @@ module.exports.restoreItem = async (req, res) => {
 
 //[GET] /admin/products/create
 module.exports.create = async (req, res) => {
+  let find = {
+    deleted: false,
+  };
+  const records = await ProductCategory.find(find);
+  const newRecords = createTreeHelper(records);
+
   res.render("admin/pages/products/create", {
     pageTitle: "Thêm mới sản phẩm",
+    records: newRecords,
   });
 };
 
@@ -205,17 +222,23 @@ module.exports.edit = async (req, res) => {
       _id: req.params.id,
     };
     const product = await Product.findOne(find);
+
+    const records = await ProductCategory.find({deleted: false});
+    const newRecords = createTreeHelper(records);
+
     const status = product.status === "active" ? true : false;
     res.render(`admin/pages/products/edit.pug`, {
       pageTitle: "Chỉnh sửa sản phẩm",
       product: product,
       status: status,
+      records: newRecords,
     });
   } catch (error) {
     res.redirect(`${systemConfig.prefixAdmin}/products`);
   }
 };
 
+//[PATCH] /admin/products/edit/id:
 module.exports.editPatch = async (req, res) => {
   req.body.price = Number(req.body.price);
   req.body.discountPercentage = Number(req.body.discountPercentage);
@@ -241,11 +264,11 @@ module.exports.detail = async (req, res) => {
   try {
     let find = {
       _id: req.params.id,
-      deleted: false
+      deleted: false,
     };
     const product = await Product.findOne(find);
     const status = product.status === "active" ? true : false;
-    
+
     res.render(`admin/pages/products/detail`, {
       pageTitle: `Chi tiết sản phẩm ${product.title}`,
       product: product,
