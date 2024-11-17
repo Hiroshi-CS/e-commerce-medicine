@@ -38,12 +38,13 @@ block main
       .row
         .col-8  
           +form-change-multi(`${prefixAdmin}/products-category/change-multi?_method=PATCH`)
-        .col-4 
-          a(
-            href=`${prefixAdmin}/products-category/create`
-            class = "btn btn-outline-success"
-            style  = "text-decoration: none"
-          ) + Thêm mới
+        .col-4
+          if(role.permissions.includes("products-category_create")) 
+            a(
+              href=`${prefixAdmin}/products-category/create`
+              class = "btn btn-outline-success"
+              style  = "text-decoration: none"
+            ) + Thêm mới
       table(
         class = "table table-hover table-sm"
         checkbox-multi

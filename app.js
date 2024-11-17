@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const flash = require("express-flash");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const moment = require("moment");
 
 require("dotenv").config(); // Cú pháp env
 
@@ -16,7 +17,7 @@ const systemConfig = require("./config/system"); // Lấy path
 
 database.connect(); // connect database
 
-const port = process.env.PORT; // gọi Port trong file env (file này chứa thông tin quan trọng)
+const port = process.env.PORT ; //  gọi Port trong file env (file này chứa thông tin quan trọng)
 const app = express(); // Trung tâm của Exprees, cho phép thực hiện các chức năng dưới
 app.use(methodOverride("_method")); // cho phép ghi đè phương thức trong Form
 
@@ -42,6 +43,7 @@ app.use(
 
 // App Local Variable
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
+app.locals.moment = moment;
 
 //Route
 route(app); // client route
@@ -49,4 +51,4 @@ adminRoute(app); // admin route
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`); //Kết nối với port
-});
+});       

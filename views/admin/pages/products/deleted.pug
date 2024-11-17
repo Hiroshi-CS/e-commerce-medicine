@@ -1,0 +1,124 @@
+extends ../../layouts/default.pug
+include ../../mixins/filter-status.pug
+include ../../mixins/search.pug
+include ../../mixins/pagination.pug
+include ../../mixins/form-change-multi.pug
+include ../../mixins/alert.pug
+include ../../mixins/sort.pug
+include ../../mixins/time.pug
+
+block main  
+  +alert-success(5000)       
+
+  h1 Danh sách sản phẩm đã xóa
+
+  .card.mb-3 
+    .card-header Bộ lọc và tìm kiếm 
+    .card-body
+      .row
+        .col-6
+          +filter-status(filterStatus)
+        .col-6
+          +search(keyword)
+    .card.mb-3 
+    .card-header Sắp xếp 
+    .card-body 
+      .row 
+        .col-4 
+          +sort()
+  .card.mb-3 
+    .card-header.d-flex.justify-content-between.align-items-center
+      .left-content      
+        p Danh sách sản phẩm đã xóa 
+      .right-content
+        a(
+          href=`${prefixAdmin}/products`
+          class = "btn btn-success"
+          ) Danh sách sản phẩm
+    .card-body
+      .row
+        .col-8  
+          +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
+      table(
+        class = "table table-hover table-sm"
+        checkbox-multi
+      )
+        thead
+          tr
+            th
+              input(type="checkbox" name="checkall") 
+            th STT
+            th Hình ảnh
+            th Tiêu đề
+            th Giá
+            th Vị trí
+            th Trạng thái
+            th Người xóa / Ngày xóa
+            th Hành động
+        tbody
+          each item, index in products 
+            tr
+              td
+                input(
+                  type = "checkbox"
+                  name = "id"
+                  value = item.id
+                )
+              td #{index + 1}
+              td: img(
+                src= item.thumbnail
+                alt= item.title
+                width="100px"
+                height="auto"
+              )
+              td #{item.title}
+              td #{item.price}$
+              td
+                input(
+                  type="number"
+                  value=item.position
+                  style="width: 60px"
+                  min="1"
+                  name="position"
+                )
+              td 
+                if(role.permissions.includes("products_edit")) 
+                  a(
+                    href = "javascript:;" 
+                    data-status = item.status
+                    data-id = item.id 
+                    button-change-status 
+                    class=`${item.status == `active` ? `badge rounded-pill text-bg-success` : `badge rounded-pill text-bg-danger`}`
+                  ) #{item.status}
+                else 
+                  div(
+                    class=`${item.status == `active` ? `badge rounded-pill text-bg-success` : `badge rounded-pill text-bg-danger`}`
+                  ) #{item.status}
+              td 
+                p #{item.accountFullName}
+                +formatTime(item.deletedBy.deletedAt)
+              td
+                if(role.permissions.includes("products_delete")) 
+                  button(
+                    class="btn btn-outline-success"
+                    button-delete-restore
+                    data-id = item.id
+                    value = isDeleted  
+                  ) Khôi phục
+
+  form(
+    action = "" 
+    method = "POST"
+    id = "form-change-status"
+    data-path = `${prefixAdmin}/products/change-status`
+  )
+
+  form(
+    action = "" 
+    method = "POST"
+    id = "form-delete-restore"
+    data-path = `${prefixAdmin}/products`
+  )
+
+
+  script(src="/admin/js/product.js")

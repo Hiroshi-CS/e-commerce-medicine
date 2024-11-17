@@ -25,26 +25,34 @@ mixin table-tree(records, level = "-- ")
             min="1"
             name="position"
           )
-        td: a(
-            href="javascript:;"
-            data-status=item.status
-            data-id=item.id 
-            button-change-status
-            class=`${item.status == 'active' ? 'badge rounded-pill text-bg-success' : 'badge rounded-pill text-bg-danger'}`
-          ) #{item.status}
+        td 
+          if(role.permissions.includes("products-category_edit"))
+            a(
+              href="javascript:;"
+              data-status=item.status
+              data-id=item.id 
+              button-change-status
+              class=`${item.status == 'active' ? 'badge rounded-pill text-bg-success' : 'badge rounded-pill text-bg-danger'}`
+            ) #{item.status}
+          else
+            div(
+              class=`${item.status == 'active' ? 'badge rounded-pill text-bg-success' : 'badge rounded-pill text-bg-danger'}`
+            ) #{item.status}
         td
           a(
             href=`${prefixAdmin}/products/detail/${item.id}`
             class="btn btn-secondary btn-sm"
           ) Chi tiết
-          a(
-            href=`${prefixAdmin}/products-category/edit/${item.id}`
-            class="btn btn-warning btn-sm"
-          ) Sửa
-          button(
-            class="btn btn-danger btn-sm ml-1"
-            button-delete-restore
-            data-id=item.id
-            value=isDeleted  
-          ) #{isDeleted}
+          if(role.permissions.includes("products-category_edit"))
+            a(
+              href=`${prefixAdmin}/products-category/edit/${item.id}`
+              class="btn btn-warning btn-sm"
+            ) Sửa
+          if(role.permissions.includes("products-category_delete"))
+            button(
+              class="btn btn-danger btn-sm ml-1"
+              button-delete-restore
+              data-id=item.id
+              value=isDeleted  
+            ) #{isDeleted}
       +table-tree(item.children, level + "-- ")

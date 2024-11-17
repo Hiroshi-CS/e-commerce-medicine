@@ -75,7 +75,6 @@ module.exports.create = async (req, res) => {
 
   const newRecords = createTreeHelper(records);
 
-  newRecords.forEach((item) => console.log(item.children));
   res.render("admin/pages/products-category/create", {
     pageTitle: "Tạo danh mục",
     records: newRecords,
@@ -103,7 +102,7 @@ module.exports.createPost = async (req, res) => {
   res.redirect(`${systemConfig.prefixAdmin}/products-category`);
 };
 
-//[PATCH] /admin/products-category/edit/id:
+//[GET] /admin/products-category/edit/id:
 module.exports.edit = async (req, res) => {
   try {
     let find = {
@@ -132,14 +131,13 @@ module.exports.editPatch = async (req, res) => {
   if (req.file) {
     req.body.thumbnail = `/uploads/${req.file.filename}`;
   } else {
-    req.body.thumbnail = "";
+    delete req.body.thumbnail
   }
   try {
     await ProductCategory.updateOne({ _id: req.params.id }, req.body);
     req.flash("success", "Cập nhật thành công!");
+    res.redirect("back");
   } catch (error) {
     res.redirect(`${systemConfig.prefixAdmin}/products-category`);
   }
-
-  res.redirect("back");
 };

@@ -1,0 +1,19 @@
+mixin product-item(item)
+  .col-4.mb-3
+    .product-item 
+      .inner-image 
+        img(
+          src=item.thumbnail, 
+          alt=item.title
+        )
+        if(item.featured=="1")
+          .inner-featured Nổi bật
+      .inner-content 
+        h3.inner-title
+          a(href=`/products/detail/${item.slug}`)  #{item.title}
+          - if(item.discountPercentage)
+            .inner-price-new #{item.priceNew.toLocaleString("vi-VN")} đ
+            .inner-price-old #{item.price.toLocaleString("vi-VN")} đ
+            .inner-discount Giảm tới: <span>#{item.discountPercentage}%</span>
+          - else
+            .inner-price-new #{item.price.toLocaleString("vi-VN")} đ

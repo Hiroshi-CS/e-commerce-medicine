@@ -1,7 +1,15 @@
 header.header
   .container-fluid
-    .row.align-items-center 
-      .col-3 
-        .inner-logo 
+    .row.align-items-center
+      .col-3
+        .inner-logo
           a(href=`${prefixAdmin}/dashboard`) ADMIN
-      .col-9 
+      .col-9.d-flex.justify-content-end
+        a(
+          href=`${prefixAdmin}/my-account`
+          class="btn btn-primary btn-sm me-2"
+        ) #{user.fullName}
+        a(
+          href=`${prefixAdmin}/auth/logout`
+          class="btn btn-danger btn-sm"
+        ) Đăng xuất

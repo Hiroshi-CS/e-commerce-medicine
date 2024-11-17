@@ -5,6 +5,7 @@ include ../../mixins/pagination.pug
 include ../../mixins/form-change-multi.pug
 include ../../mixins/alert.pug
 include ../../mixins/sort.pug
+include ../../mixins/time.pug
 
 block main  
   +alert-success(5000)       
@@ -38,12 +39,13 @@ block main
       .row
         .col-8  
           +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
-        .col-4 
-          a(
-            href=`${prefixAdmin}/products/create`
-            class = "btn btn-outline-success"
-            style  = "text-decoration: none"
-          ) + Thêm mới
+        .col-4
+          if(role.permissions.includes("products_create")) 
+            a(
+              href=`${prefixAdmin}/products/create`
+              class = "btn btn-outline-success"
+              style  = "text-decoration: none"
+            ) + Thêm mới
       table(
         class = "table table-hover table-sm"
         checkbox-multi
@@ -57,7 +59,9 @@ block main
             th Tiêu đề
             th Giá
             th Vị trí
-            th Trạng thái 
+            th Trạng thái
+            th Người tạo / Ngày tạo
+            th Người cập nhật / Ngày cập nhật
             th Hành động
         tbody
           each item, index in products 
@@ -85,28 +89,44 @@ block main
                   min="1"
                   name="position"
                 )
-              td: a(
-                  href = "javascript:;" 
-                  data-status = item.status
-                  data-id = item.id 
-                  button-change-status 
-                  class=`${item.status == `active` ? `badge rounded-pill text-bg-success` : `badge rounded-pill text-bg-danger`}`
-                ) #{item.status}
+              td 
+                if(role.permissions.includes("products_edit")) 
+                  a(
+                    href = "javascript:;" 
+                    data-status = item.status
+                    data-id = item.id 
+                    button-change-status 
+                    class=`${item.status == `active` ? `badge rounded-pill text-bg-success` : `badge rounded-pill text-bg-danger`}`
+                  ) #{item.status}
+                else 
+                  div(
+                    class=`${item.status == `active` ? `badge rounded-pill text-bg-success` : `badge rounded-pill text-bg-danger`}`
+                  ) #{item.status}
+              td 
+                p #{item.accountFullName}
+                +formatTime(item.createdBy.createdAt)
+              td 
+                - const updatedBy = item.updatedBy.splice(-1)[0];
+                if(updatedBy)
+                  p #{item.accountFullName}
+                  +formatTime(updatedBy.updatedAt)
               td
                 a(
                   href = `${prefixAdmin}/products/detail/${item.id}`
                   class = "btn btn-secondary btn-sm"
                 ) Chi tiết
-                a(
-                  href = `${prefixAdmin}/products/edit/${item.id}`
-                  class = "btn btn-warning btn-sm"
-                ) Sửa
-                button(
-                  class="btn btn-danger btn-sm ml-1"
-                  button-delete-restore
-                  data-id = item.id
-                  value = isDeleted  
-                ) #{isDeleted}
+                if(role.permissions.includes("products_edit")) 
+                  a(
+                    href = `${prefixAdmin}/products/edit/${item.id}`
+                    class = "btn btn-warning btn-sm"
+                  ) Sửa
+                if(role.permissions.includes("products_delete")) 
+                  button(
+                    class="btn btn-danger btn-sm ml-1"
+                    button-delete-restore
+                    data-id = item.id
+                    value = isDeleted  
+                  ) #{isDeleted}
   +pagination(pagination)
 
   form(
