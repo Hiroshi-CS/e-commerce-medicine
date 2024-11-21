@@ -26,3 +26,19 @@ if(buttonsGoBack.length > 0){
   })
 }
 // End Button Go Back
+
+// Pagination
+const buttonPagination = document.querySelectorAll("[button-pagination]");
+if (buttonPagination) {
+  let url = new URL(window.location.href);
+  buttonPagination.forEach((page) => {
+    page.addEventListener("click", () => {
+      const Page = page.getAttribute("button-pagination");
+      if (Page) {
+        url.searchParams.set("page", Page); // Thay đổi page trên thanh url = page( button )
+      } else url.searchParams.delete("page");
+      window.location.href = url; //Trả về url mới thỏa điều kiện button
+    });
+  });
+}
+// End Pagination

@@ -19,7 +19,7 @@ router.post(
 router.get("/edit/:id", controller.edit);
 router.patch(
   "/edit/:id",
-  upload.single("thumbnail"),
+  upload.single("avatar"),
   validate.editPost,
   controller.editPatch
 );

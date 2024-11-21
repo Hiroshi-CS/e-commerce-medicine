@@ -1,0 +1,24 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+
+block main     
+  .container.my-3
+    .row 
+      .col-12
+        +box-head(pageTitle)
+    .row
+      .col-4
+        if (user.avatar)
+          img(src=user.avatar class="img-fluid rounded-circle mb-3 border" style="max-width: auto;")
+        else
+          img(src="/default-avatar.png" class="img-fluid rounded-circle mb-3 border" style="max-width: auto;")
+
+      .col-8
+          if (user.fullName)
+            p Họ tên: <b>#{user.fullName}</b>
+
+          if (user.email)
+            p Email: <b>#{user.email}</b>
+
+          if (user.phone)
+            p Số điện thoại: <b>#{user.phone}</b>

@@ -5,26 +5,24 @@ header.header
     .row.align-items-center 
       .col-3 
         .inner-logo 
-          a(href="/")
-            img(src="/images/Little-wife.jpg", alt="logo")
-      .col-5 
-        form(
-          action = "search"
-          method = "GET"
-        )
-          div(class="form-group d-flex mb-0")
-            input(
-              type = "text"
+          a.logo(href="/")
+            i.ri-home-heart-line
+              |  Medicine
+      .col-3 
+        .search-box
+          form.search(
+            action = "search"
+            method = "GET"
+          )
+            span.icon-large
+              i.ri-search-line
+            input(type = "text"
               placeholder = "Nhập từ khóa..."
               class = "form-control"
               name = "keyword"
-              value = keyword
-            )
-            button(
-              type = "submit"
-              class = "btn btn-primary"
-            ) Tìm
-      .col-4 
+              value = keyword)
+            button(type="submit") Search
+      .col-6 
         .inner-menu 
           ul 
             li 
@@ -35,4 +33,15 @@ header.header
                 +sub-menu(layoutProductCategory,pathCategory)
             li 
               a(href="/cart") Giỏ hàng (#{miniCart ? miniCart.totalQuantity : "0"})
-                
+            - if(!user)
+              li
+                a(href="/user/register") Đăng ký
+              li
+                a(href="/user/login") Đăng nhập
+            - else
+              li 
+                a(href=`/user/info/${user.id}`) #{user.fullName} 
+              li 
+                a(href="/user/logout") Đăng xuất 
+
+            

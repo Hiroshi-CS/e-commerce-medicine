@@ -11,13 +11,13 @@ block main
         button-go-back
       ) Trở lại
       .row 
-        .col-6
+        .col-4
           .inner-thumb
             img.img-fluid(
               src = product.thumbnail 
               alt = product.title
             )
-        .col-6 
+        .col-7 
           h1(class="inner-title") #{product.title}
           if(product.category)
             div(class = "inner-category") 
@@ -43,6 +43,7 @@ block main
             label(for="quantity") Số lượng
             input(
               class = "form-control mb-2"
+              style="width: 300px; height: 40px; border-radius: 5px; border: 1px solid #ccc;"
               id    = "quantity"
               type  = "number"
               name  = "quantity"

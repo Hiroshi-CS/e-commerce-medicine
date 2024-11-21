@@ -1,19 +1,38 @@
 mixin product-item(item)
-  .col-4.mb-3
+  .col-3.mb-3
     .product-item 
-      .inner-image 
+      .inner-image
         img(
           src=item.thumbnail, 
           alt=item.title
         )
+        if(item.discountPercentage)
+          .inner-discount Giảm tới: <span>#{item.discountPercentage}%</span>
         if(item.featured=="1")
           .inner-featured Nổi bật
       .inner-content 
         h3.inner-title
-          a(href=`/products/detail/${item.slug}`)  #{item.title}
-          - if(item.discountPercentage)
-            .inner-price-new #{item.priceNew.toLocaleString("vi-VN")} đ
-            .inner-price-old #{item.price.toLocaleString("vi-VN")} đ
-            .inner-discount Giảm tới: <span>#{item.discountPercentage}%</span>
-          - else
-            .inner-price-new #{item.price.toLocaleString("vi-VN")} đ
+          a(href=`/products/detail/${item.slug}`) #{item.title}
+        div.d-flex.justify-content-between.align-items-center.mt-2
+          form(
+            action=`/cart/add/${item.id}`
+            method="POST"
+          )
+            input(
+              class = "form-control mb-2"
+              id    = "quantity"
+              type  = "number"
+              name  = "quantity"
+              value = "1"
+              hidden
+            )
+            button(
+              type  = "submit"
+              class = "btn btn-outline-success btn-block"
+            ) Thêm vào giỏ hàng
+          div.text-end
+            - if(item.discountPercentage)
+              .inner-price-new #{item.priceNew.toLocaleString("vi-VN")} đ
+              .inner-price-old #{item.price.toLocaleString("vi-VN")} đ
+            - else
+              .inner-price-new #{item.price.toLocaleString("vi-VN")} đ

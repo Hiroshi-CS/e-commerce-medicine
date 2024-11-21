@@ -113,7 +113,7 @@ a{
   text-decoration: line-through;
 }
 
-.product-item .inner-content .inner-discount {
+.product-item .inner-discount {
   font-size: 14px;
   font-weight: 600;
   color: white;
@@ -121,6 +121,9 @@ a{
   display: inline-block;
   padding: 3px 10px;
   border-radius: 8px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 /* sub-menu */
