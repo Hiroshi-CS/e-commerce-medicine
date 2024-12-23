@@ -11,7 +11,23 @@ const userSchema = new mongoose.Schema(
       default: generate.genarateRandomString(20),
     },
     phone: String,
+    address: String,
     avatar: String,
+    orders: [
+      {
+        products: [
+          {
+            product_id: String,
+            quantity: Number,
+          },
+        ],
+        totalPrice: String,
+        createAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
     status: {
       type: String,
       default: "active",

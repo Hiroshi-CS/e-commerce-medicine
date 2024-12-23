@@ -1,6 +1,8 @@
 mixin pagination(pagination)
   nav.nav.justify-content-center
-    ul(class="pagination")
+    ul(
+      class="pagination"
+    )
       if (pagination.currentPage > 1)
         li(class="page-item")
           button(

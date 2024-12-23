@@ -1,10 +1,14 @@
 const express = require("express");
+const multer = require("multer");
+
 const router = express.Router();
 
 const controller = require("../../controller/client/user.controller");
 const validate = require("../../validates/client/user.validate");
+const storageMulter = require("../../helper/storageMulter.js");
 
-router.get("/user/info/:id", controller.userInfo);
+const upload = multer({ storage: storageMulter() });
+
 router.get("/register", controller.register);
 router.post("/register", validate.registerPost, controller.registerPost);
 router.get("/login", controller.login);
@@ -25,5 +29,8 @@ router.post(
   controller.resetPasswordPost
 );
 router.get("/info/:id", controller.userInfo);
+router.patch("/edit", upload.single("avatar"), controller.editPatch);
+
+router.get("/orderDetail/:index", controller.orderDetail);
 
 module.exports = router;

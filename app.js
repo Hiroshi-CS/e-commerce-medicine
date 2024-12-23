@@ -29,8 +29,12 @@ app.set("view engine", "pug"); // Sử dụng view engine là pug
 app.use(express.static(`${__dirname}/public`)); //Cấu hình file tĩnh
 
 // Flash
-app.use(cookieParser("My adorable Jia")); // set key cho cookieParser (optional)
-app.use(session({ cookie: { maxAge: 60000 } }));
+app.use(cookieParser()); // set key cho cookieParser (optional)
+app.use(session({  
+  secret: 'your-secret-key',   
+  resave: false,               
+  saveUninitialized: true,
+  cookie: { maxAge: 600000 } }));
 app.use(flash());
 // End Flash
 

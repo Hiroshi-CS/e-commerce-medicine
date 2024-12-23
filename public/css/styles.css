@@ -3,10 +3,11 @@ body {
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;
   margin: 0;
+  font-size: 1.5rem;
 }
 
 /* Header */
-.header{
+.header {
   border-bottom: 1px solid #ddd;
   padding: 1px 0;
 }
@@ -24,35 +25,35 @@ body {
   justify-content: flex-end;
   flex-wrap: wrap;
 }
-.header .inner-menu > ul > li{
+.header .inner-menu > ul > li {
   margin-left: 20px;
 }
 /* End Header */
 
 /* Body */
-.body{
+.body {
   display: grid;
   grid-template-rows: auto 1fr auto;
   min-height: 200vh;
   margin: 0;
 }
 /* footer */
-.footer{
+.footer {
   background: #333;
   color: #fff;
   text-align: center;
   padding: 10px;
 }
 /* End footer */
-a{
+a {
   text-decoration: none;
 }
 /* Box-head */
-.box-head{
+.box-head {
   margin-bottom: 30px;
 }
 
-.box-head .inner-title{
+.box-head .inner-title {
   margin-bottom: 0;
   font-size: 28px;
   font-weight: 600;
@@ -61,7 +62,7 @@ a{
 /* End box-head */
 
 /* product-item */
-.product-item{
+.product-item {
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
@@ -85,28 +86,28 @@ a{
   font-size: 14px;
   border-radius: 8px;
 }
-.product-item .inner-image img{
+.product-item .inner-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.product-item .inner-content{
+.product-item .inner-content {
   padding: 15px;
 }
 
-.product-item .inner-content .inner-title{
+.product-item .inner-content .inner-title {
   font-size: 20px;
   font-weight: 600;
 }
 
-.product-item .inner-content .inner-price-new{
+.product-item .inner-content .inner-price-new {
   font-size: 18px;
   font-weight: 600;
   color: green;
 }
 
-.product-item .inner-content .inner-price-old{
+.product-item .inner-content .inner-price-old {
   font-size: 18px;
   font-weight: 600;
   color: red;
@@ -127,12 +128,12 @@ a{
 }
 
 /* sub-menu */
-.sub-menu{
+.sub-menu {
   position: relative;
   z-index: 999;
 }
 
-.sub-menu ul{
+.sub-menu ul {
   position: absolute;
   right: 0;
   top: 100%;
@@ -144,51 +145,51 @@ a{
   display: none;
 }
 
-.sub-menu ul li{
+.sub-menu ul li {
   padding: 10px;
   border-bottom: 1px solid #ddd;
-} 
+}
 
-.sub-menu:hover > ul{
+.sub-menu:hover > ul {
   display: block;
 }
 
-.sub-menu ul li{
+.sub-menu ul li {
   position: relative;
 }
 
-.sub-menu ul li ul{
+.sub-menu ul li ul {
   right: 100%;
   top: 0;
 }
 
-.sub-menu ul li:hover >ul{
+.sub-menu ul li:hover > ul {
   display: block;
 }
 
 /* product-detail */
-.product-detail .inner-thumb  img{
+.product-detail .inner-thumb img {
   width: 100%;
   height: auto;
 }
 
-.product-detail .inner-title{
+.product-detail .inner-title {
   font-size: 32px;
   margin-bottom: 15px;
 }
 
-.product-detail .inner-category{
+.product-detail .inner-category {
   margin-bottom: 10px;
 }
 
-.product-detail .inner-price-new{
+.product-detail .inner-price-new {
   color: green;
   font-weight: 600;
   font-size: 24px;
   margin-bottom: 10px;
 }
 
-.product-detail .inner-price-old{
+.product-detail .inner-price-old {
   color: red;
   font-weight: 600;
   font-size: 20px;
@@ -196,7 +197,7 @@ a{
   margin-bottom: 10px;
 }
 
-.product-detail .inner-percent span{
+.product-detail .inner-percent span {
   color: #fff;
   background: red;
   font-weight: 600;
@@ -205,11 +206,11 @@ a{
   border-radius: 8px;
 }
 
-.product-detail .inner-stock{
+.product-detail .inner-stock {
   margin-bottom: 10px;
 }
 
-.product-detail .inner-stock span{
+.product-detail .inner-stock span {
   color: #fff;
   background: green;
   font-weight: 600;
@@ -255,3 +256,47 @@ a{
   cursor: pointer;
 }
 /* End Show Alert */
+/* Show Avatar */
+.image-container {
+  position: relative;
+}
+.image-container button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: none;
+}
+/* End Show Avatar */
+
+/* Show Order Detail */
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  width: 50%;
+  text-align: center;
+}
+
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}

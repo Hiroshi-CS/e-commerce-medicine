@@ -5,6 +5,7 @@ const ForgotPassword = require("../../models/forgot-password.model");
 
 const generateHelper = require("../../helper/generate");
 const sendMailHelper = require("../../helper/sendMail");
+const Product = require("../../models/product.model");
 
 //[GET] /user/register
 module.exports.register = async (req, res) => {
@@ -99,11 +100,11 @@ module.exports.forgotPasswordPost = async (req, res) => {
   // Việc 2: Gửi mã OTP qua email
   const subject = "Mã OTP xác minh lấy lại mật khẩu";
   const html = `
-    Mã OTP xác minh lấy lại mật khẩu là <b>${objectForgotPassword.otp }</b>.
+    Mã OTP xác minh lấy lại mật khẩu là <b>${objectForgotPassword.otp}</b>.
     Thời hạn sử dụng là 3 phút.
     Lưu ý không để lộ mã OTP
-  `
-  sendMailHelper.sendMail(email,subject,html)
+  `;
+  sendMailHelper.sendMail(email, subject, html);
   res.redirect(`/user/password/otp?email=${email}`);
 };
 
@@ -147,8 +148,8 @@ module.exports.otpPasswordPost = async (req, res) => {
 
 //[GET] /user/password/reset
 module.exports.resetPassword = async (req, res) => {
-  res.render("client/pages/user/reset-password")
-}
+  res.render("client/pages/user/reset-password");
+};
 
 //[POST] /user/password/reset
 module.exports.resetPasswordPost = async (req, res) => {
@@ -157,14 +158,14 @@ module.exports.resetPasswordPost = async (req, res) => {
 
   await User.updateOne(
     {
-      tokenUser: tokenUser
+      tokenUser: tokenUser,
     },
     {
-      password: md5(password)
+      password: md5(password),
     }
-  )
-  res.redirect("/")
-}
+  );
+  res.redirect("/");
+};
 
 //[GET] /user/info/:id
 module.exports.userInfo = async (req, res) => {
@@ -173,10 +174,47 @@ module.exports.userInfo = async (req, res) => {
   const user = await User.findOne({
     _id: id,
     status: "active",
-    deleted: false
+    deleted: false,
   });
-  res.render("client/pages/user/info",{
+  let orders =[];
+  for (order of user.orders) {
+    let products = [];
+    for (product of order.products) {
+      let productInfo = await Product.findOne({
+        _id: product.product_id,
+      })
+        .select("title thumbnail price discountPercentage")
+        .lean();
+      productInfo.quantity = product.quantity;
+      products.push(productInfo);
+    }
+    orders.push(products);
+  }
+  res.render("client/pages/user/info", {
     pageTitle: "Trang cá nhân",
     user: user,
-  })
+    orders: orders,
+  });
+};
+
+module.exports.orderDetail = (req,res) =>{
+  const index = req.params.index;
+  req.flash("index", index);
+  res.redirect("back");
 }
+module.exports.editPatch = async (req, res) => {
+  const userToken = req.cookies.tokenUser;
+  if (req.file) {
+    req.body.avatar = `/uploads/${req.file.filename}`;
+  } else {
+    delete req.body.avatar;
+  }
+  try {
+    await User.updateOne({ tokenUser: userToken}, req.body);
+    req.flash("success", "Cập nhật thành công!");
+    res.redirect("back");
+  } catch (error) {
+    console.log(error);
+    res.redirect(`/`);
+  }
+};
