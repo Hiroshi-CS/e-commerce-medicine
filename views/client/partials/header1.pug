@@ -2,11 +2,11 @@
   aside.side-off.desktop-hide
     .off-canvas
       .canvas-head.flexitem
-        .logo 
-          a(href="/") 
-            i.ri-home-heart-line 
+        .logo
+          a(href="/")
+            i.ri-home-heart-line
             | Medicine
-        a.t-close.flexcenter(href="")
+        a.t-close.flexcenter(href="#")
           i.ri-close-line
       .all-products
       nav
@@ -16,117 +16,120 @@
   header
     .header-top
       .container
-          .wrapper.flexitem
-              .left
-                  ul.flexitem.main-links
-                      li 
-                          a(href="/") Hỏi đáp
-                      li 
-                          a(href="/about") Về chúng tôi
-                      li 
-                          a(href="/contact") Liên hệ
-              .right
-                  ul.flexitem
-                      li.main-links
-                          - if(!user)
-                            li 
-                              a(href="/user/login") 
-                                  i.ri-user-3-fill 
-                                  | Đăng nhập/ Đăng kí
-                          - else
-                            li 
-                              a(href="/cart") Theo dõi đơn hàng
-                            li 
-                              a(href=`/user/info/${user.id}`) #{user.fullName} 
-                            li 
-                              a(href="/user/logout") Đăng xuất 
+        .wrapper.flexitem
+          .left
+            ul.flexitem.main-links
+              li
+                a(href="/") Hỏi đáp
+              li
+                a(href="/about") Về chúng tôi
+              li
+                a(href="/contact") Liên hệ
+          .right
+            ul.flexitem
+              li.main-links
+                if !user
+                  li
+                    a(href="/user/login")
+                      i.ri-user-3-fill
+                      | Đăng nhập/ Đăng kí
+                else
+                  li
+                    a(href="/cart") Theo dõi đơn hàng
+                  li
+                    a(href=`/user/info/${user.id}`) #{user.fullName}
+                  li
+                    a(href="/user/logout") Đăng xuất
+
     //- Header Nav
     .header-nav
       .container
         .wrapper.flexitem
-          a.trigger.desktop-hide(href="/")
+          a.trigger.desktop-hide(href="#")
             span.i.ri-menu-2-line
-            .left.flexitem
-              .logo
-                a(href="/") 
-                  i.ri-home-heart-line 
-                  | Medicine
-              nav.mobile-hide
-                ul.flexitem.second-links
-                  li 
-                    a(href="/") Trang chủ
-                  li 
-                    a(href="/products") Shop
-                  li.child
-                    a(href="/") Thuốc
-                      .icon-small
-                        i.ri-arrow-down-s-line
-                    .mega
-                      .container
-                        .wrapper
-                          .flexcol
-                            .row
-                              h4 Mắt, tai mũi họng
-                              ul
-                                li 
-                                  a(href="/") Thuốc nhỏ mắt, tra mắt
-                                li 
-                                  a(href="/") Thuốc xịt, nhỏ mũi
-                                li 
-                                  a(href="/") Thuốc trị ho, long đờm
-                                li 
-                                  a(href="/") Thuốc nhỏ tai
-                                li 
-                                  a(href="/") Thuốc trị bệnh răng, miệng
-                          .flexcol
-                            .row
-                              h4 Tiêu hóa, gan mật
-                              ul
-                                li 
-                                  a(href="/") Thuốc trị táo bón
-                                li 
-                                  a(href="/") Thuốc trị trĩ
-                                li 
-                                  a(href="/") Thuốc hỗ trợ hệ tiêu hóa
-                                li 
-                                  a(href="/") Thuốc trị tiêu chảy
-                                li 
-                                  a(href="/") Thuốc thanh độ, giải nhiệt
-                          .flexcol
-                            .row
-                              h4 Giảm đau, hạ sốt
-                              ul
-                                li 
-                                  a(href="/")
-                                li 
-                                  a(href="/")
-                                li 
-                                  a(href="/")
-                                li 
-                                  a(href="/")
-                                li 
-                                  a(href="/")
-                          .flexcol
-                            .row
-                              h4 Da liễu, dị ứng
-                              ul
-                                li 
-                                  a(href="/") Thuốc chống dị ứng
-                                li 
-                                  a(href="/") Thuốc kháng nấm
-                                li 
-                                  a(href="/") Thuốc trị viêm da
-                                li 
-                                  a(href="/") Dung dịch sát trùng
-                                li 
-                                  a(href="/") Thuốc trị mụn
-                              a.view-all(href="/") 
-                                | Xem tất cả 
-                                i.ri-arrow-right-s-line
-                  li 
-                    a(href="/") Trang bị y tế
-                      .icon-small
-                        i.ri-arrow-down-s-line
+          .left.flexitem
+            .logo
+              a(href="/")
+                i.ri-home-heart-line
+                | Medicine
+            nav.mobile-hide
+              ul.flexitem.second-links
+                li
+                  a(href="/") Trang chủ
+                li
+                  a(href="/products") Shop
+                li.child
+                  a(href="#")
+                    | Thuốc
+                    .icon-small
+                      i.ri-arrow-down-s-line
+                  .mega
+                    .container
+                      .wrapper
+                        .flexcol
+                          .row
+                            h4 Mắt, tai mũi họng
+                            ul
+                              li
+                                a(href="#") Thuốc nhỏ mắt, tra mắt
+                              li
+                                a(href="#") Thuốc xịt, nhỏ mũi
+                              li
+                                a(href="#") Thuốc trị ho, long đờm
+                              li
+                                a(href="#") Thuốc nhỏ tai
+                              li
+                                a(href="#") Thuốc trị bệnh răng, miệng
+                        .flexcol
+                          .row
+                            h4 Tiêu hóa, gan mật
+                            ul
+                              li
+                                a(href="#") Thuốc trị táo bón
+                              li
+                                a(href="#") Thuốc trị trĩ
+                              li
+                                a(href="#") Thuốc hỗ trợ hệ tiêu hóa
+                              li
+                                a(href="#") Thuốc trị tiêu chảy
+                              li
+                                a(href="#") Thuốc thanh độ, giải nhiệt
+                        .flexcol
+                          .row
+                            h4 Giảm đau, hạ sốt
+                            ul
+                              li
+                                a(href="#")
+                              li
+                                a(href="#")
+                              li
+                                a(href="#")
+                              li
+                                a(href="#")
+                              li
+                                a(href="#")
+                        .flexcol
+                          .row
+                            h4 Da liễu, dị ứng
+                            ul
+                              li
+                                a(href="#") Thuốc chống dị ứng
+                              li
+                                a(href="#") Thuốc kháng nấm
+                              li
+                                a(href="#") Thuốc trị viêm da
+                              li
+                                a(href="#") Dung dịch sát trùng
+                              li
+                                a(href="#") Thuốc trị mụn
+                            a.view-all(href="#")
+                              | Xem tất cả
+                              i.ri-arrow-right-s-line
+                li
+                  a(href="#")
+                    | Trang bị y tế
+                    .icon-small
+                      i.ri-arrow-down-s-line
           .right
             ul.flexitem.second-links
               li.mobile-hide
@@ -137,11 +140,12 @@
                       span.item-number 0
                   .icon-text
                     .mini-text Tổng
-                    .cart-total 
-                      - if(miniCart.totalPrice)
+                    .cart-total
+                      if miniCart.totalPrice
                         | #{miniCart.totalPrice.toLocaleString("vi-VN")} đ
-                      - else  
+                      else
                         | 0 đ
+
     .header-main.mobile-hide
       .container
         .wrapper.flexitem
@@ -150,111 +154,123 @@
               .ctg-head
                 .main-text Tất cả sản phẩm
                 .mini-text.mobile-hide
-                a.ctg-trigger.mobile-hide(href="/")
+                a.ctg-trigger.mobile-hide(href="#")
                   i.ri-menu-fill
               .ctg-menu
                 ul.second-links
                   li.child.func-food
-                    a(href="/")
+                    a(href="#")
                       .icon-large
                         i.ri-capsule-fill
                       | Thực phẩm chức năng
                       .icon-small
                         i.ri-arrow-right-s-line
                     ul
-                      li: a(href="/") Dinh dưỡng
-                      li: a(href="/") Vitamin và khoáng chất
-                      li: a(href="/") Thảo dược và thực phẩm tự nhiên
-                      li: a(href="/") Hỗ trợ điều trị
-                      li: a(href="/") Hỗ trợ tiêu hóa
-                      li: a(href="/") Tăng cường chức năng
-                      li: a(href="/") Hỗ trợ làm đẹp
-                      li: a(href="/") Hỗ trợ sức khỏe tim mạch
-                      li: a(href="/") Sinh lý- Nội tiết
-
+                      li
+                        a(href="#") Dinh dưỡng
+                      li
+                        a(href="#") Vitamin và khoáng chất
+                      li
+                        a(href="#") Thảo dược và thực phẩm tự nhiên
+                      li
+                        a(href="#") Hỗ trợ điều trị
+                      li
+                        a(href="#") Hỗ trợ tiêu hóa
+                      li
+                        a(href="#") Tăng cường chức năng
+                      li
+                        a(href="#") Hỗ trợ làm đẹp
+                      li
+                        a(href="#") Hỗ trợ sức khỏe tim mạch
+                      li
+                        a(href="#") Sinh lý- Nội tiết
                   li.child
-                    a(href="/")
+                    a(href="#")
                       .icon-large
                         i.ri-capsule-fill
                       | Chăm sóc cá nhân
                       .icon-small
                         i.ri-arrow-right-s-line
                     ul
-                      li: a(href="/") Chăm sóc phụ nữ
-                      li: a(href="/") Chăm sóc trẻ em
-                      li: a(href="/") Chăm sóc răng miệng
-                      li: a(href="/") Lăn xịt khử mùi
-                      li: a(href="/") Đồ chăm sóc khác
-                      li: a(href="/") Vệ sinh cá nhân
-                      li: a(href="/") Khăn giấy
-
+                      li
+                        a(href="#") Chăm sóc phụ nữ
+                      li
+                        a(href="#") Chăm sóc trẻ em
+                      li
+                        a(href="#") Chăm sóc răng miệng
+                      li
+                        a(href="#") Lăn xịt khử mùi
+                      li
+                        a(href="#") Đồ chăm sóc khác
+                      li
+                        a(href="#") Vệ sinh cá nhân
+                      li
+                        a(href="#") Khăn giấy
                   li.child
-                    a(href="/")
+                    a(href="#")
                       .icon-large
                         i.ri-heart-add-fill
                       | Sức khỏe sinh sản
                       .icon-small
                         i.ri-arrow-right-s-line
                     ul
-                      li: a(href="/") Hỗ trợ tình dục
-                      li: a(href="/") Kế hoạch hóa gia đình
-
+                      li
+                        a(href="#") Hỗ trợ tình dục
+                      li
+                        a(href="#") Kế hoạch hóa gia đình
                   li.child
-                    a(href="/")
+                    a(href="#")
                       .icon-large
                         i.ri-capsule-fill
                       | Chăm sóc sắc đẹp
                       .icon-small
                         i.ri-arrow-right-s-line
                     ul
-                      li: a(href="/") Chăm sóc tóc
-                      li: a(href="/") Chăm sóc da
-                      li: a(href="/") Điều trị da mặt
-                      li: a(href="/") Chăm sóc cơ thể
-                      li: a(href="/") Dụng cụ làm đẹp
-                      li: a(href="/") Trang điểm
-
+                      li
+                        a(href="#") Chăm sóc tóc
+                      li
+                        a(href="#") Chăm sóc da
+                      li
+                        a(href="#") Điều trị da mặt
+                      li
+                        a(href="#") Chăm sóc cơ thể
+                      li
+                        a(href="#") Dụng cụ làm đẹp
+                      li
+                        a(href="#") Trang điểm
                   li.child
-                    a(href="/")
+                    a(href="#")
                       .icon-large
                         i.ri-capsule-fill
                       | Góc sống khỏe
-
                   li
-                    a(href="/")
+                    a(href="#")
                       .icon-large
                         i.ri-syringe-line
                       | Xét nghiệm
-
                   li.child
-                    a(href="/")
+                    a(href="#")
                       .icon-large
                         i.ri-medicine-bottle-line
                       | Thiết bị y tế
                       .icon-small
                         i.ri-arrow-right-s-line
                     ul
-                      li: a(href="/") Dụng cụ sơ cứu
-                      li: a(href="/") Dụng cụ vệ sinh tai, mũi, họng
-                      li: a(href="/") Khẩu trang
-
+                      li
+                        a(href="#") Dụng cụ sơ cứu
+                      li
+                        a(href="#") Dụng cụ vệ sinh tai, mũi, họng
+                      li
+                        a(href="#") Khẩu trang
                   li.child
-                    a(href="/")
+                    a(href="#")
                       .icon-large
                         i.ri-nurse-fill
                       | Tư vấn sức khỏe
-
           .right
             .search-box
-              form.search(
-                action = "search"
-                method = "GET"
-              )
+              form.search(action="search" method="GET")
                 span.icon-large
                   i.ri-search-line
-                input(type = "text"
-                  placeholder = "Nhập từ khóa..."
-                  class = "form-control"
-                  name = "keyword"
-                  value = keyword)
+                input(type="text" placeholder="Nhập từ khóa..." class="form-control" name="keyword" value=keyword)
                 button(type="submit") Search
