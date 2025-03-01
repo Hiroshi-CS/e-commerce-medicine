@@ -39,14 +39,14 @@ block main
               button(
                 type="button"
                 id="change-avatar-btn"
-                class="btn btn-outline-primary mb-5"
+                class="btn btn-outline-primary mt-2 mb-4"
               ) Thay đổi avatar
             span.font-weight-bold #{user.fullName}
             span.text-black-50 #{user.email}
         .col-md-5.border-right
           .p-3.py-5
             .d-flex.justify-content-between.align-items-center.mb-3
-              h4.text-right Trang cá nhân
+              h4.text-right Thông tin cá nhân
             .row.mt-2
               .col-md-6
                 label.labels Họ và Tên
@@ -91,63 +91,63 @@ block main
                 class = "btn btn-primary"
                 type = "submit"
               ) Lưu thông tin
-      .row 
-        +box-head("Lịch sử đặt hàng")
-      .row 
-        .col-md-12
-          table.table.table-bordered
-            thead
+    .row
+      +box-head("Lịch sử đặt hàng")
+    .row 
+      .col-md-12
+        table.table.table-bordered
+          thead
+            tr
+              th STT
+              th Mã đơn hàng
+              th Ngày đặt
+              th Tổng tiền
+              th Trạng thái
+              th Chi tiết
+          tbody
+            each order,index in user.orders
               tr
-                th STT
-                th Mã đơn hàng
-                th Ngày đặt
-                th Tổng tiền
-                th Trạng thái
-                th Chi tiết
-            tbody
-              each order,index in user.orders
-                tr
-                  td #{index + 1}
-                  td #{order._id}
-                  td 
-                    +formatTime(order.createAt)
-                  td #{order.totalPrice.toLocaleString()} VNĐ
-                  td Đang vận chuyển
-                  td
-                    button(
-                      type = "button"
-                      class = "btn btn-outline-primary"
-                      open-modal-button
-                      data-index = index
-                    ) Xem chi tiết
-      #modal.modal
-        .modal-content
-          span#close-button.close-button.text-end X
-          .col-12
-          .text-start 
-            +box-head("Đơn hàng")
-          .row 
-            .col-12 
-              table(class="table table-bordered")
-                thead 
-                  tr 
-                    th STT 
-                    th Ảnh 
-                    th Tên 
-                    th Giá (VNĐ)
-                    th Số lượng
-                tbody 
-                  if messages.index && messages.index.length > 0
-                    each product, index in orders[parseInt(messages.index[0])]
-                      tr
-                        td #{index + 1}
-                        td 
-                          img(
-                            src = product.thumbnail
-                            alt = "sản phẩm 1"
-                            width = "80px"
-                          )
-                        td #{product.title}
-                        td #{product.price}
-                        td #{product.quantity}
+                td #{index + 1}
+                td #{order._id}
+                td 
+                  +formatTime(order.createAt)
+                td #{order.totalPrice.toLocaleString()} VNĐ
+                td Đang vận chuyển
+                td
+                  button(
+                    type = "button"
+                    class = "btn btn-outline-primary"
+                    open-modal-button
+                    data-index = index
+                  ) Xem chi tiết
+  if messages.index && messages.index.length > 0
+    #modal.modal
+      .modal-content
+        span#close-button.close-button.text-end X
+        .col-12
+        .text-start 
+          +box-head("Đơn hàng")
+        .row 
+          .col-12 
+            table(class="table table-bordered")
+              thead 
+                tr 
+                  th STT 
+                  th Ảnh 
+                  th Tên 
+                  th Giá (VNĐ)
+                  th Số lượng
+              tbody 
+                each product, index in orders[parseInt(messages.index[0])]
+                  tr
+                    td #{index + 1}
+                    td 
+                      img(
+                        src = product.thumbnail
+                        alt = "sản phẩm 1"
+                        width = "80px"
+                      )
+                    td #{product.title}
+                    td #{product.price}
+                    td #{product.quantity}
   script(src="/js/user.js")

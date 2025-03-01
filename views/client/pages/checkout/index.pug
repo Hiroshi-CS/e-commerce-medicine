@@ -47,36 +47,68 @@ block main
               action="/checkout/order"
               method="POST"
             )
-              div(class="form-group")
-                label(for="fullName") Họ Tên 
-                input(
-                  type="text"
-                  class="form-control"
-                  id="fullName"
-                  name="fullName"
-                  value=user.fullName
-                  required
-                )
-              div(class="form-group")
-                label(for="phone") Số điện thoại
-                input(
-                  type="text"
-                  class="form-control"
-                  id="phone"
-                  name="phone"
-                  value=user.phone
-                  required
-                )
-              div(class="form-group")
-                label(for="address") Địa chỉ 
-                input(
-                  type="text"
-                  class="form-control"
-                  id="address"
-                  name="address"
-                  value=user.address
-                  required
-                )
+              if(user)
+                div(class="form-group")
+                  label(for="fullName") Họ Tên 
+                  input(
+                    type="text"
+                    class="form-control"
+                    id="fullName"
+                    name="fullName"
+                    value=user.fullName
+                    required
+                  )
+                div(class="form-group")
+                  label(for="phone") Số điện thoại
+                  input(
+                    type="text"
+                    class="form-control"
+                    id="phone"
+                    name="phone"
+                    value=user.phone
+                    required
+                  )
+                div(class="form-group")
+                  label(for="address") Địa chỉ 
+                  input(
+                    type="text"
+                    class="form-control"
+                    id="address"
+                    name="address"
+                    value=user.address
+                    required
+                  )
+              else
+                div(class="form-group")
+                  label(for="fullName") Họ Tên 
+                  input(
+                    type="text"
+                    class="form-control"
+                    id="fullName"
+                    name="fullName"
+                    placeholder="Họ và tên"
+                    required
+                  )
+                div(class="form-group")
+                  label(for="phone") Số điện thoại
+                  input(
+                    type="text"
+                    class="form-control"
+                    id="phone"
+                    name="phone"
+                    placeholder="Số điện thoại"
+                    required
+                  )
+                div(class="form-group")
+                  label(for="address") Địa chỉ 
+                  input(
+                    type="text"
+                    class="form-control"
+                    id="address"
+                    name="address"
+                    placeholder="Địa chỉ"
+                    required
+                  )
               div(class="form-group")
                 button(
                   type="submit"

@@ -2,10 +2,14 @@ extends ../../layouts/default.pug
 include ../../mixins/box-head.pug
 include ../../mixins/product-layout.pug 
 include ../../mixins/pagination.pug
+include ../../mixins/sort.pug
 block main 
   .container.my-3
     .row 
       .col-12
         +box-head(pageTitle)
+    .row 
+      .col-2
+        +sort()
     +product-grid(products)
     +pagination(pagination)

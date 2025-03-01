@@ -37,14 +37,14 @@ const closeButton = document.getElementById("close-button");
 if(openModalButton.length > 0){
   openModalButton.forEach(button =>{
     button.addEventListener("click", function () {
-      modal.style.display = "block";
       const index = button.getAttribute("data-index");
       window.location.href = `/user/orderDetail/${index}`
     });
   })
 }
-
-closeButton.addEventListener("click", function () {
-  modal.style.display = "none";
-});
+if(modal && closeButton){
+  closeButton.addEventListener("click", function () {
+    modal.style.display = "none";
+  });
+}
 

@@ -1,5 +1,8 @@
 doctype html
-html(lang="en")
+html(
+  lang="en"
+  style="zoom: 0.9;"
+  )
   head
     title= pageTitle
     meta(name="viewport" content="width=device-width, initial-scale=1") 
@@ -10,7 +13,9 @@ html(lang="en")
     link(rel="stylesheet", href="/css/styles.css")
     include ../../mixins/box-head.pug
     include ../../mixins/product-layout.pug 
-
+    style. 
+      html
+        
   body
     include ../../partials/header1.pug
 

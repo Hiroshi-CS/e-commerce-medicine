@@ -14,12 +14,17 @@ module.exports.index = async (req, res) => {
     req.query,
     countProducts
   );
-
+  let sort = {};
+  if (req.query.sortKey && req.query.sortValue) {
+    sort[req.query.sortKey] = req.query.sortValue;
+  } else {
+    sort.position = "desc";
+  }
   const products = await Product.find({
     status: "active",
     deleted: false,
   })
-    .sort({ position: "desc" })
+    .sort(sort)
     .limit(objectPagination.limitItems)
     .skip(objectPagination.skip);
   const newProducts = productHelper.priceNewProducts(products);

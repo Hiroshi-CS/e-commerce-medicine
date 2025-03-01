@@ -137,7 +137,11 @@
                       span.item-number 0
                   .icon-text
                     .mini-text Tổng
-                    .cart-total #{miniCart.totalPrice.toLocaleString("vi-VN")} đ
+                    .cart-total 
+                      - if(miniCart.totalPrice)
+                        | #{miniCart.totalPrice.toLocaleString("vi-VN")} đ
+                      - else  
+                        | 0 đ
     .header-main.mobile-hide
       .container
         .wrapper.flexitem

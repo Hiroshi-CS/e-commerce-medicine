@@ -34,12 +34,7 @@
 html
 {
     font-size: 62.5%;
-    overflow-x: hidden;
-    scroll-padding-top: 7rem;
-    scroll-behavior: smooth;
-    transform: scale(0.97); /* Thu nhỏ toàn bộ trang xuống 90% */
-    transform-origin: left; /* Đảm bảo thu nhỏ từ góc trên bên trái */
-    width: 100%; /*Đảm bảo không tạo khoảng trắng bên phải */
+
 }
 
 *{

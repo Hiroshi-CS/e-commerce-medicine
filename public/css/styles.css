@@ -47,6 +47,7 @@ body {
 /* End footer */
 a {
   text-decoration: none;
+  display: inline-block;
 }
 /* Box-head */
 .box-head {

@@ -42,3 +42,36 @@ if (buttonPagination) {
   });
 }
 // End Pagination
+
+// Sort
+const sort = document.querySelector("[sort]");
+if (sort) {
+  let url = new URL(window.location.href);
+  const sortSelect = document.querySelector("[sort-select]");
+  const sortClear = document.querySelector("[sort-clear]");
+
+  sortSelect.addEventListener("change", (e) => {
+    const value = e.target.value;
+
+    const [sortKey, sortValue] = value.split("-");
+
+    url.searchParams.set("sortKey", sortKey);
+    url.searchParams.set("sortValue", sortValue);
+
+    window.location.href = url;
+  });
+
+  sortClear.addEventListener("click", () => {
+    url.searchParams.delete("sortKey");
+    url.searchParams.delete("sortValue");
+
+    window.location.href = url;
+  });
+  const sortKey = url.searchParams.get("sortKey");
+  const sortValue = url.searchParams.get("sortValue");
+  if(sortKey && sortValue){
+    sortSelect.value = `${sortKey}-${sortValue}`;
+    sortSelect.selected = true;
+  }
+}
+// End Sort
