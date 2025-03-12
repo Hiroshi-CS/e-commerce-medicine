@@ -1,0 +1,13 @@
+mixin cart-icon(miniCart)
+  .col-2.text-end.cart-container
+    a.iscart(href="/cart")
+      i.ri-shopping-cart-2-line
+      span.item-number (#{miniCart ? miniCart.totalQuantity : "0"})       
+
+    .cart-total-box
+      .mini-text Tổng: 
+        .cart-total
+          if miniCart.totalPrice
+            | #{miniCart.totalPrice.toLocaleString("vi-VN")} đ
+          else
+            | 0 đ 

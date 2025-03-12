@@ -134,17 +134,15 @@
             ul.flexitem.second-links
               li.mobile-hide
                 a.iscart(href="/cart")
-                  .icon-large
-                    i.ri-shopping-cart-2-line
-                    .fly-item
-                      span.item-number 0
+                  i.ri-shopping-cart-2-line
+                    span.item-number (#{miniCart ? miniCart.totalQuantity : "0"})
                   .icon-text
                     .mini-text Tổng
                     .cart-total
                       if miniCart.totalPrice
                         | #{miniCart.totalPrice.toLocaleString("vi-VN")} đ
                       else
-                        | 0 đ
+                        | 0 đ 
 
     .header-main.mobile-hide
       .container
@@ -152,7 +150,7 @@
           .left
             .categories
               .ctg-head
-                .main-text Tất cả sản phẩm
+                .main-text Danh mục sản phẩm
                 .mini-text.mobile-hide
                 a.ctg-trigger.mobile-hide(href="#")
                   i.ri-menu-fill

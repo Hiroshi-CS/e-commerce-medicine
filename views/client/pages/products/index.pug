@@ -3,13 +3,17 @@ include ../../mixins/box-head.pug
 include ../../mixins/product-layout.pug 
 include ../../mixins/pagination.pug
 include ../../mixins/sort.pug
+include ../../mixins/cart-icon.pug
 block main 
   .container.my-3
     .row 
       .col-12
-        +box-head(pageTitle)
-    .row 
-      .col-2
+        +box-head(pageTitle)            
+
+    .row.d-flex.align-items-center.justify-content-between
+      .col-4
         +sort()
+      +cart-icon(miniCart)
+
     +product-grid(products)
     +pagination(pagination)

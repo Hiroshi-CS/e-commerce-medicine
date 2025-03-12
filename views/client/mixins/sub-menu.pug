@@ -1,7 +1,8 @@
-mixin sub-menu(items, path)
-  ul 
-    each item in items 
-      li 
-        a(href = `${path}/${item.slug}`) #{item.title}
-        if item.children && item.children.length > 0
-          +sub-menu(item.children, path)
+mixin sub-menu(items, path, level = 0)
+  if level <= 1 
+    ul(class=`sub-menu-level-${level}`)
+      each item in items
+        li(class=level === 0 ? 'category-item' : 'subcategory-item')
+          a(href=`${path}/${item.slug}`) #{item.title}
+          if item.children && item.children.length > 0 && level < 1
+            +sub-menu(item.children, path, level + 1)

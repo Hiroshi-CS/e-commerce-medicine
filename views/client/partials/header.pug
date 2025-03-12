@@ -3,44 +3,44 @@ include ../mixins/sub-menu.pug
 header.header
   .container 
     .row.align-items-center 
-      .col-3 
+      .col-2 
         .inner-logo 
           a.logo(href="/")
             i.ri-home-heart-line
               |  Medicine
-      .col-3 
+      .col-4 
         .search-box
           form.search(
-            action = "search"
-            method = "GET"
+            action="search"
+            method="GET"
           )
             span.icon-large
               i.ri-search-line
-            input(type = "text"
-              placeholder = "Nhập từ khóa..."
-              class = "form-control"
-              name = "keyword"
-              value = keyword)
+            input(type="text"
+              placeholder="Tìm kiếm sản phẩm..."
+              class="form-control"
+              name="keyword"
+              value=keyword)
             button(type="submit") Search
       .col-6 
         .inner-menu 
-          ul 
+          ul.second-links.flexitem 
             li 
               a(href="/") Trang chủ
-            - const pathCategory =  "/products"
+            - const pathCategory = "/products"
             li(class="sub-menu")
-              a(href=pathCategory) Sản phẩm   
-                +sub-menu(layoutProductCategory,pathCategory)
+              a(href=pathCategory) Sản phẩm 
+                i(class="fas fa-chevron-down dropdown-arrow")
+              +sub-menu(layoutProductCategory, pathCategory)
             li 
               a(href="/cart") Giỏ hàng (#{miniCart ? miniCart.totalQuantity : "0"})
-            - if(!user)
+            - if (!user)
               li
                 a(href="/user/register") Đăng ký
               li
                 a(href="/user/login") Đăng nhập
             - else
               li 
-                a(href=`/user/info/${user.id}`) #{user.fullName} 
+                a(href=`/user/info/${user.id}`) #{user.fullName}
               li 
-                a(href="/user/logout") Đăng xuất 
-            
+                a(href="/user/logout") Đăng xuất
