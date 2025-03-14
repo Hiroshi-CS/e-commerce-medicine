@@ -1,11 +1,14 @@
 mixin sort()
   div(sort)
     div(class="d-flex align-items-center gap-2")
+      .div Bộ lọc
+      i.fa-solid.fa-filter
       select(
         class="form-control"
         name="sort"
         sort-select
-      )
+      ) 
+        option(disable default) --- Sắp xếp theo ---
         option(value="discountPercentage-desc") Giảm giá sốc
         option(value="price-desc") Giá giảm dần
         option(value="price-asc") Giá tăng dần

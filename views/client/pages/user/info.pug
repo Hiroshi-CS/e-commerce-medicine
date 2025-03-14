@@ -2,152 +2,154 @@ extends ../../layouts/default.pug
 include ../../mixins/box-head.pug
 include ../../mixins/time.pug
 
-block main     
-  .container.rounded.bg-white.mt-5.mb-5
-    form(
-      action=`/user/edit?_method=PATCH`
-      method="POST"
-      enctype="multipart/form-data"
-    ) 
-      .row
-        .col-md-3.border-right
-          .d-flex.flex-column.align-items-center.text-center.p-3.py-5
-            .form-group.upload-image
-              .image-container
-                img(
-                  class="rounded-circle mt-5 img-fluid"
-                  id="avatar-preview"
-                  style="width: 150px; height: 150px; object-fit: cover;"
-                  src=user.avatar || "/uploads/avatar-default.jpg"
+block main
+  #user-page     
+    .container.rounded.bg-white.mt-5.mb-5
+      form(
+        class="user-info"
+        action=`/user/edit?_method=PATCH`
+        method="POST"
+        enctype="multipart/form-data"
+      ) 
+        .row
+          .col-md-3.border-right
+            .d-flex.flex-column.align-items-center.text-center.p-3.py-5
+              .form-group.upload-image
+                .image-container
+                  img(
+                    class="rounded-circle mt-5 img-fluid"
+                    id="avatar-preview" 
+                    style="width: 150px; height: 150px; object-fit: cover;"
+                    src= user.avatar || "/uploads/avatar-default.jpg"
+                  )
+                  button(
+                    type="button"
+                    class="btn btn-danger btn-sm"
+                    id="remove-avatar-btn"
+                  ) x
+                div(
+                  class 
+                )
+                input(
+                  type="file"
+                  class="form-control btn btn-outline-primary mt-3"
+                  id="avatar-input"
+                  name="avatar"
+                  accept="image/*"
+                  hidden
                 )
                 button(
                   type="button"
-                  class="btn btn-danger btn-sm"
-                  id="remove-avatar-btn"
-                ) X
-              div(
-                class 
-              )
-              input(
-                type="file"
-                class="form-control btn btn-outline-primary mt-3"
-                id="avatar-input"
-                name="avatar"
-                accept="image/*"
-                hidden
-              )
-              button(
-                type="button"
-                id="change-avatar-btn"
-                class="btn btn-outline-primary mt-2 mb-4"
-              ) Thay đổi avatar
-            span.font-weight-bold #{user.fullName}
-            span.text-black-50 #{user.email}
-        .col-md-5.border-right
-          .p-3.py-5
-            .d-flex.justify-content-between.align-items-center.mb-3
-              h4.text-right Thông tin cá nhân
-            .row.mt-2
-              .col-md-6
-                label.labels Họ và Tên
-                input(
-                  class = "form-control"
-                  type="text",
-                  name="fullName" 
-                  placeholder="Họ và tên", 
-                  value= user.fullName
-                )
-              .col-md-6
-                label.labels Email
-                input(
-                  class = "form-control"
-                  type="text",
-                  name="email",
-                  placeholder="Email", 
-                  value= user.email
-                  disabled
+                  id="change-avatar-btn"
+                  class="btn btn-outline-primary mt-2 mb-4"
+                ) Thay đổi avatar
+              span.font-weight-bold #{user.fullName}
+              span.text-black-50 #{user.email}
+          .col-md-5.border-right
+            .p-3.py-5
+              .d-flex.justify-content-between.align-items-center.mb-3
+                h4.text-right Thông tin cá nhân
+              .row.mt-2
+                .col-md-6
+                  label.labels Họ và Tên
+                  input(
+                    class = "form-control"
+                    type="text",
+                    name="fullName" 
+                    placeholder="Họ và tên", 
+                    value= user.fullName
                   )
-            .row.mt-3
-              .col-md-6
-                label.labels Số điện thoại 
-                input(
-                  class="form-control",
-                  type='text',
-                  name="phone" 
-                  placeholder='Số điện thoại', 
-                  value= user.phone
+                .col-md-6
+                  label.labels Email
+                  input(
+                    class = "form-control"
+                    type="text",
+                    name="email",
+                    placeholder="Email", 
+                    value= user.email
+                    disabled
+                    )
+              .row.mt-3
+                .col-md-6
+                  label.labels Số điện thoại 
+                  input(
+                    class="form-control",
+                    type='text',
+                    name="phone" 
+                    placeholder='Số điện thoại', 
+                    value= user.phone
+                    )
+                .col-md-12
+                  label.labels Địa chỉ
+                  input(
+                    class="form-control"
+                    type="text",
+                    name="address"
+                    placeholder='Địa chỉ',
+                    value= user.address
                   )
-              .col-md-12
-                label.labels Địa chỉ
-                input(
-                  class="form-control"
-                  type="text",
-                  name="address"
-                  placeholder='Địa chỉ',
-                  value= user.address
-                )
-            .mt-5.text-center
-              button(
-                class = "btn btn-primary"
-                type = "submit"
-              ) Lưu thông tin
-    .row
-      +box-head("Lịch sử đặt hàng")
-    .row 
-      .col-md-12
-        table.table.table-bordered
-          thead
-            tr
-              th STT
-              th Mã đơn hàng
-              th Ngày đặt
-              th Tổng tiền
-              th Trạng thái
-              th Chi tiết
-          tbody
-            each order,index in user.orders
+              .mt-5.text-center
+                button(
+                  class = "btn btn-outline-primary"
+                  type = "submit"
+                ) Lưu thông tin
+      .row
+        +box-head("Lịch sử đặt hàng")
+      .row 
+        .col-md-12
+          table.table.table-bordered
+            thead
               tr
-                td #{index + 1}
-                td #{order._id}
-                td 
-                  +formatTime(order.createAt)
-                td #{order.totalPrice.toLocaleString()} VNĐ
-                td Đang vận chuyển
-                td
-                  button(
-                    type = "button"
-                    class = "btn btn-outline-primary"
-                    open-modal-button
-                    data-index = index
-                  ) Xem chi tiết
-  if messages.index && messages.index.length > 0
-    #modal.modal
-      .modal-content
-        span#close-button.close-button.text-end X
-        .col-12
-        .text-start 
-          +box-head("Đơn hàng")
-        .row 
-          .col-12 
-            table(class="table table-bordered")
-              thead 
-                tr 
-                  th STT 
-                  th Ảnh 
-                  th Tên 
-                  th Giá (VNĐ)
-                  th Số lượng
-              tbody 
-                each product, index in orders[parseInt(messages.index[0])]
-                  tr
-                    td #{index + 1}
-                    td 
-                      img(
-                        src = product.thumbnail
-                        alt = "sản phẩm 1"
-                        width = "80px"
-                      )
-                    td #{product.title}
-                    td #{product.price}
-                    td #{product.quantity}
+                th STT
+                th Mã đơn hàng
+                th Ngày đặt
+                th Tổng tiền
+                th Trạng thái
+                th Chi tiết
+            tbody
+              each order,index in user.orders
+                tr
+                  td #{index + 1}
+                  td #{order._id}
+                  td 
+                    +formatTime(order.createAt)
+                  td #{order.totalPrice.toLocaleString()} VNĐ
+                  td Đang vận chuyển
+                  td
+                    button(
+                      type = "button"
+                      class = "btn btn-outline-primary"
+                      open-modal-button
+                      data-index = index
+                    ) Xem chi tiết
+    if messages.index && messages.index.length > 0
+      #modal.modal
+        .modal-content
+          span#close-button.close-button.text-end X
+          .col-12
+          .text-start 
+            +box-head("Đơn hàng")
+          .row 
+            .col-12 
+              table(class="table table-bordered")
+                thead 
+                  tr 
+                    th STT 
+                    th Ảnh 
+                    th Tên 
+                    th Giá (VNĐ)
+                    th Số lượng
+                tbody 
+                  each product, index in orders[parseInt(messages.index[0])]
+                    tr
+                      td #{index + 1}
+                      td 
+                        img(
+                          src = product.thumbnail
+                          alt = "sản phẩm 1"
+                          width = "80px"
+                        )
+                      td #{product.title}
+                      td #{product.price}
+                      td #{product.quantity}
   script(src="/js/user.js")

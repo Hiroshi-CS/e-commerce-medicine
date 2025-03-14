@@ -8,7 +8,8 @@ const changeAvatarBtn = document.getElementById("change-avatar-btn");
 changeAvatarBtn.addEventListener("click", () => {
   avatarInput.click(); // Kích hoạt hành động chọn tệp
 });
-
+let avatarStorage = ""
+if(avatarPreview.src != "/uploads/avatar-default.jpg") avatarStorage= avatarPreview.src;
 // Khi người dùng chọn một file
 avatarInput.addEventListener("change", (e) => {
   const file = e.target.files[0];
@@ -24,7 +25,9 @@ avatarInput.addEventListener("change", (e) => {
 
 // Khi người dùng nhấn nút X để quay lại avatar mặc định
 removeAvatarBtn.addEventListener("click", () => {
-  avatarPreview.src = avatarPreview.dataset.defaultAvatar || "/uploads/avatar-default.jpg";
+  if (avatarStorage != "") avatarPreview.src = avatarStorage;
+  else
+    avatarPreview.src = avatarPreview.dataset.defaultAvatar || "/uploads/avatar-default.jpg";
   avatarInput.value = ""; // Xóa file đã chọn
   removeAvatarBtn.style.display = "none"; // Ẩn nút X
 });

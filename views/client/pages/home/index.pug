@@ -1,7 +1,29 @@
 extends ../../layouts/default.pug
 include ../../mixins/box-head.pug
 include ../../mixins/product-layout.pug 
+include ../../mixins/carousel.pug
 block main 
+  .container.my-3
+    .row 
+      .col-12
+        +box-head("Trang chủ")
+  .section-products-featured.my-5
+      .container.my-3
+        .row
+          .col-4
+            .product-categories
+              +box-head("Danh mục sản phẩm", "fa-solid fa-list-ul")
+              ul
+                li: a(href="/products/thuoc") Thuốc
+                li: a(href="/products/trang-bi-y-te") Trang bị y tế
+                li: a(href="#") Tra cứu bệnh
+                li: a(href="#") Thực phẩm chức năng
+                li: a(href="#") Chăm sóc cá nhân
+                li: a(href="#") Mẹ và bé
+                li: a(href="#") Chăm sóc sắc đẹp
+                li: a(href="#") Góc sức khỏe
+          .col-8
+            +carousel()
   .section-products-featured.my-5
     .container.my-3
       .row 

@@ -1,0 +1,13 @@
+mixin carousel()
+  #carouselExampleAutoplaying.carousel.slide(data-bs-ride='carousel')
+    .carousel-inner
+      .carousel-item.active
+        img.d-block.w-100.h-100(src= `/uploads/slide-1.png` alt='slide 1')
+      .carousel-item
+        img.d-block.w-100.h-100(src= `/uploads/slide-2.png` alt='slide 2')
+    button.carousel-control-prev(type='button' data-bs-target='#carouselExampleAutoplaying' data-bs-slide='prev')
+      span.carousel-control-prev-icon(aria-hidden='true')
+      span.visually-hidden Previous
+    button.carousel-control-next(type='button' data-bs-target='#carouselExampleAutoplaying' data-bs-slide='next')
+      span.carousel-control-next-icon(aria-hidden='true')
+      span.visually-hidden Next

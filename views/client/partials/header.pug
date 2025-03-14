@@ -3,7 +3,7 @@ include ../mixins/sub-menu.pug
 header.header
   .container 
     .row.align-items-center 
-      .col-2 
+      .col-1 
         .inner-logo 
           a.logo(href="/")
             i.ri-home-heart-line
@@ -22,7 +22,7 @@ header.header
               name="keyword"
               value=keyword)
             button(type="submit") Search
-      .col-6 
+      .col-3 
         .inner-menu 
           ul.second-links.flexitem 
             li 
@@ -32,15 +32,38 @@ header.header
               a(href=pathCategory) Sản phẩm 
                 i(class="fas fa-chevron-down dropdown-arrow")
               +sub-menu(layoutProductCategory, pathCategory)
+      .col-3
+        .inner-tools
+          ul.second-links.flexitem 
             li 
-              a(href="/cart") Giỏ hàng (#{miniCart ? miniCart.totalQuantity : "0"})
+              a(href="/cart") Giỏ hàng
+                i.fas.fa-shopping-cart 
+                | (#{miniCart ? miniCart.totalQuantity : "0"})
+            li 
+              i.fas.fa-language
+              |  LANG
+            li
+              i.fas.fa-bell 
+      .col-1
+        .inner-avatar 
+          ul.second-links.flexitem 
             - if (!user)
               li
-                a(href="/user/register") Đăng ký
-              li
-                a(href="/user/login") Đăng nhập
+                a(href="/user/login") Đăng nhập/Đăng ký
             - else
-              li 
-                a(href=`/user/info/${user.id}`) #{user.fullName}
-              li 
-                a(href="/user/logout") Đăng xuất
+              li.dropdown
+                a#dropdownMenuButton.dropdown-toggle(href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false")
+                  img.rounded-circle(src=user.avatar || "/uploads/avatar-default.jpg" alt="Avatar")
+
+                ul.dropdown-menu.dropdown-menu-end(aria-labelledby="dropdownMenuButton")
+                  li
+                    a.dropdown-item(href=`/user/info/${user.id}`) Trang cá nhân
+                  li
+                    hr.dropdown-divider
+                  li
+                    a.dropdown-item(href="/user/password/reset") Đổi mật khẩu
+                  li
+                    hr.dropdown-divider
+                  li
+                    a.dropdown-item(href="/user/logout") Đăng xuất
+

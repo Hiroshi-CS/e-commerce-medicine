@@ -13,7 +13,7 @@ mixin product-item(item)
       .inner-content 
         h3.inner-title
           a(href=`/products/detail/${item.slug}`) #{item.title}
-        div.d-flex.justify-content-between.align-items-center.mt-2
+        div.d-flex.justify-content-between.align-items-center
           form(
             action=`/cart/add/${item.id}`
             method="POST"
