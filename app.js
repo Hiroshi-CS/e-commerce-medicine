@@ -9,6 +9,7 @@ const flash = require("express-flash");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const moment = require("moment");
+const generateRandomString = require("./helper/generate");
 
 require("dotenv").config(); // Init dotenv
 
@@ -84,8 +85,7 @@ io.use((socket, next) => {
                 return next(new Error("invalid username"));
             }
             // create new session
-            socket.sessionID = randomId();
-            socket.userID = randomId();
+            socket.sessionID = generateRandomString();
             socket.username = username;
             next();
         }
@@ -99,7 +99,6 @@ io.on("connection", (socket) => {
     // Return unique sessionID when connect
     socket.emit("session", {
         sessionID: socket.sessionID,
-        userID: socket.userID,
     });
 
     // Handle disconnected of user
