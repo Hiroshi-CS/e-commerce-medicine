@@ -28,10 +28,14 @@ header.header
             li 
               a(href="/") Trang chủ
             - const pathCategory = "/products"
-            li(class="sub-menu")
-              a(href=pathCategory) Sản phẩm 
-                i(class="fas fa-chevron-down dropdown-arrow")
-              +sub-menu(layoutProductCategory, pathCategory)
+            li(class="dropdown sub-menu")
+              a.dropdown-toggle(
+                href=pathCategory data-bs-toggle="dropdown" 
+                aria-expanded="false")
+                | Sản phẩm 
+                i.fas.fa-chevron-down
+              ul.dropdown-menu.category-dropdown
+                +renderSubMenu(layoutProductCategory)
       .col-3
         .inner-tools
           ul.second-links.flexitem 
@@ -49,7 +53,7 @@ header.header
           ul.second-links.flexitem 
             - if (!user)
               li
-                a(href="/user/login") Đăng nhập/Đăng ký
+                a(href="/user/login") Đăng nhập
             - else
               li.dropdown
                 a#dropdownMenuButton.dropdown-toggle(href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false")

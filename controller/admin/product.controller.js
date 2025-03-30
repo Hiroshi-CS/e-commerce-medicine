@@ -259,6 +259,15 @@ module.exports.createPost = async (req, res) => {
   req.body.createdBy = {
     account_id: res.locals.user.id,
   };
+
+  if (req.body.categoryIds) {
+    req.body.categoryIds = Array.isArray(req.body.categoryIds) 
+      ? req.body.categoryIds 
+      : [req.body.categoryIds]; 
+  } else {
+    req.body.categoryIds = []; 
+  }
+  
   const product = new Product(req.body);
   await product.save();
 

@@ -78,5 +78,25 @@ if (sort) {
 
 
 // Dropdown menu
-
-// End Dropdown meni
+document.addEventListener("DOMContentLoaded", function() {
+  const toggles = document.querySelectorAll(".category-toggle");
+  toggles.forEach(toggle => {
+    toggle.addEventListener("click", function(e) {
+      e.preventDefault(); 
+      const subMenu = this.nextElementSibling;
+      if (subMenu && subMenu.classList.contains("sub-menu")) {
+        subMenu.classList.toggle("hidden");
+      }
+    });
+  });
+  const dropdowns = document.querySelectorAll(".dropdown-toggle");
+  dropdowns.forEach(dropdown => {
+    dropdown.addEventListener("click", function(e) {
+      const dropdownMenu = this.nextElementSibling;
+      if (dropdownMenu && !dropdownMenu.classList.contains("show")) {
+        e.preventDefault(); 
+      }
+    });
+  });
+});
+// End Dropdown menu

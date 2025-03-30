@@ -9,7 +9,7 @@ module.exports.category = async (req, res, next) => {
   const productCategory = await ProductCategory.find(find);
   const newProductCategory = createTreeHelper(productCategory);
 
-  res.locals.layoutProductCategory = newProductCategory;
+  res.locals.layoutProductCategory = newProductCategory; 
 
   return next();
 };

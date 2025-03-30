@@ -5,10 +5,12 @@ mongoose.plugin(slug);
 
 const productSchema = new mongoose.Schema({
   title: String,
-  product_category_id: {
-    type: String,
-    default: "",
-  },
+  categoryIds: [
+    {
+      type: String,
+      default: "",
+    },
+  ],
   description: String,
   price: Number,
   discountPercentage: Number,
@@ -17,6 +19,13 @@ const productSchema = new mongoose.Schema({
   status: String,
   featured: String,
   position: Number,
+  activeIngredients: [
+    {
+      ingredientName: String,
+      amount: String,
+    }
+  ],
+  dosage: String,
   createdBy: {
     account_id: String,
     createdAt: {
