@@ -1,0 +1,31 @@
+mixin renderCategories(categories, level = "")
+  each category in categories
+    if level == ""
+      div(class="col-md-4")
+        div(class="form-check category-item")
+          input(
+            type="checkbox"
+            name="categoryIds[]"
+            value=category._id
+            id=`category-${category._id}`
+            class="form-check-input category-toggle"
+            checked=product && product.categoryIds.includes(category._id.toString())
+          )
+          label(for=`category-${category._id}` class="form-check-label") #{category.title}
+        if category.children
+          div(class="children hidden" data-level=level + "-- ") 
+            +renderCategories(category.children, level + "-- ")
+    else
+      div(class="form-check category-item" style="margin-left: 20px")
+        input(
+          type="checkbox"
+          name="categoryIds[]"
+          value=category._id
+          id=`category-${category._id}`
+          class="form-check-input category-toggle"
+          checked=product && product.categoryIds.includes(category._id.toString())
+        )
+        label(for=`category-${category._id}` class="form-check-label") #{level} #{category.title}
+      if category.children
+        div(class="children hidden" data-level=level + "-- ") 
+          +renderCategories(category.children, level + "-- ")

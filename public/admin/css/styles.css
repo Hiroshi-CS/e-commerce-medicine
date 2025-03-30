@@ -1,45 +1,124 @@
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+}
+
+/* Font */
+
+.body {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+}
+
+.header {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 20px;
 }
 
 /* Header */
-
 .header {
-  background: #202020;
-  padding: 10px 0;
+  background: linear-gradient(to right, #2c3e50, #3498db);
+  padding: 10px 20px;
   position: sticky;
   top: 0;
-  z-index: 999;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header .inner-logo {
+  margin-left: 0;
+  /* Đảm bảo không có margin trái */
+}
+
+.header .d-flex.align-items-center {
+  margin-right: 0;
+  /* Đảm bảo không có margin phải */
 }
 
 .header .inner-logo a {
   font-size: 24px;
   font-weight: 700;
-  color: #fff;
+  color: #ffffff;
+  transition: color 0.3s ease;
 }
-/* End Header */
+
+.header .inner-logo a:hover {
+  color: #5dade2;
+  /* Xanh lá nhạt khi hover */
+}
+
+.header .user-info {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+
+.header .user-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.header .user-info span {
+  font-size: 14px;
+}
 
 /* Body */
+body {
+  background-color: #2c3e50;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
 .body .sider {
-  width: 150px;
-  background: #323232;
-  color: #fff;
-  height: calc(100vh - 56px);
+  width: 250px;
+  /* Rộng hơn để giống Maxton */
+  background: #2c3e50;
+  /* Xanh đậm */
+  color: #ffffff;
+  height: 100vh;
   position: fixed;
-  top: 56px;
+  top: 0;
   left: 0;
+  padding-top: 60px;
+  transition: width 0.3s ease;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
 }
 
 .body .main {
-  margin: 15px;
+  margin: 20px;
   position: relative;
-  left: 150px;
-  width: calc(100% - 180px);
+  left: 250px;
+  width: calc(100% - 270px);
+  min-height: calc(100vh - 40px);
+  padding: 20px;
+  background: #4a6076;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-/* End Body */
 
 /* Sider */
-
 .sider .inner-menu ul {
   list-style: none;
   padding: 0;
@@ -48,25 +127,37 @@ a:hover {
 
 .sider .inner-menu ul li a {
   color: #fff;
-  display: block;
-  padding: 6px 10px;
-  border-bottom: 1px solid #515151;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid #34495e;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
 }
-/* End Sider */
 
-a {
-  text-decoration: none;
+.sider .inner-menu ul li a:hover {
+  background-color: #34495e;
+  color: #5dade2;
 }
-a:hover {
-  text-decoration: none;
+
+.sider .inner-menu ul li a.active {
+  background-color: #5dade2;
+  color: #2c3e50;
+}
+
+.sider .inner-menu ul li a i {
+  margin-right: 10px;
 }
 
 /* Show Alert */
 [show-alert] {
   position: fixed;
-  top: 70px;
-  right: 15px;
-  z-index: 9999;
+  top: 80px;
+  right: 20px;
+  z-index: 1001;
+  border-radius: 5px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 [show-alert].alert-hidden {
@@ -77,8 +168,9 @@ a:hover {
 
 @keyframes alert-hidden {
   from {
-    right: 15px;
+    right: 20px;
   }
+
   to {
     right: -100%;
     display: none;
@@ -86,7 +178,8 @@ a:hover {
 }
 
 [show-alert] [close-alert] {
-  background: #ffffffc4;
+  background: rgba(44, 62, 80, 0.7);
+  /* Xanh đậm mờ */
   display: inline-block;
   width: 24px;
   height: 24px;
@@ -95,8 +188,14 @@ a:hover {
   font-weight: 600;
   border-radius: 50%;
   cursor: pointer;
+  color: #ffffff;
+  transition: background-color 0.3s ease;
 }
-/* End Show Alert */
+
+[show-alert] [close-alert]:hover {
+  background-color: #e74c3c;
+  /* Đỏ nhạt */
+}
 
 /* Image Preview & Close Image */
 .image-container {
@@ -109,13 +208,15 @@ a:hover {
   width: 150px;
   height: auto;
   margin-top: 15px;
-  border: 1px solid #ddd;
+  border: 1px solid #34495e;
   padding: 15px;
   border-radius: 5px;
+  transition: opacity 0.3s ease;
+  opacity: 0;
 }
 
-.image-container [upload-image-preview][src=""]{
-  display: none;
+.image-container [upload-image-preview][src]:not([src=""]) {
+  opacity: 1;
 }
 
 .image-container [close-image] {
@@ -123,8 +224,9 @@ a:hover {
   position: absolute;
   top: 5px;
   right: 5px;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  background-color: rgba(44, 62, 80, 0.7);
+  /* Xanh đậm mờ */
+  color: #ffffff;
   padding: 2px 5px;
   border: none;
   border-radius: 3px;
@@ -132,10 +234,232 @@ a:hover {
   font-size: 14px;
   font-weight: bold;
   line-height: 1;
+  transition: background-color 0.3s ease;
 }
 
 .image-container [close-image]:hover {
-  background-color: rgba(255, 0, 0, 0.7);
+  background-color: #e74c3c;
 }
 
-/* Image Preview & Close Image */
+.image-container [upload-image-preview][src]:not([src=""]) ~ [close-image] {
+  display: block;
+}
+
+.btn-primary {
+  background-color: #5dade2;
+  color: #2c3e50;
+  transition: background-color 0.3s ease, border-radius 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background-color: #3498db;
+  border-radius: 7px;
+}
+
+.modal-overlay {
+  background-color: rgba(44, 62, 80, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .body .sider {
+    width: 200px;
+  }
+
+  .body .main {
+    left: 200px;
+    width: calc(100% - 220px);
+  }
+
+  .sider .inner-menu ul li a {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  .body .sider {
+    width: 0;
+    position: fixed;
+    left: -250px;
+    height: 100%;
+    transition: left 0.3s ease;
+  }
+
+  .body .sider.active {
+    left: 0;
+    width: 250px;
+  }
+
+  .body .main {
+    left: 0;
+    width: 100%;
+  }
+}
+
+/* Button */
+.btn-logout {
+  background-color: #e74c3c;
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-logout:hover {
+  background-color: #c0392b;
+}
+
+.btn-add {
+  background-color: #27ae60;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-add:hover {
+  background-color: #219653;
+}
+
+.btn-edit {
+  display: block;
+  text-align: center;
+  background-color: #f1c40f;
+  color: #2c3e50;
+  padding: 5px 16px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-edit:hover {
+  background-color: #d4ac0d;
+}
+
+.btn-details {
+  display: block;
+  text-align: center;
+  background-color: #3498db;
+  color: #ffffff;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-details:hover {
+  background-color: #2980b9;
+}
+
+.btn-delete {
+  display: block;
+  text-align: center;
+  background-color: #e74c3c;
+  color: #ffffff;
+  padding: 5px 18px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-delete:hover {
+  background-color: #c0392b;
+}
+
+.my-table {
+  border-color: #2c3e50;
+  margin-top: 20px;
+}
+
+/* Sort */
+[sort="sort"] {
+  display: flex;
+  margin-bottom: 20px;
+  gap: 10px;
+  margin-left: 10px;
+}
+[sort="sort"] .d-flex {
+  background-color: #e8f5e9;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+[sort="sort"] .form-control {
+  font-size: 1.1rem;
+  min-width: 200px;
+  background-color: #fff;
+  color: #4caf50;
+  border-color: #4caf50;
+}
+
+[sort="sort"] .btn-danger {
+  font-size: 1rem;
+  color: #e8f5e9;
+  background-color: #2e7d32;
+  padding: 8px 16px;
+  white-space: nowrap;
+}
+
+/* Pagination */
+.pagination {
+  margin-top: 30px;
+}
+
+.pagination .page-link {
+  color: #2c3e50;
+  border-radius: 4px;
+  margin: 0 5px;
+  transition: background-color 0.3s;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #2c3e50;
+  color: #fff;
+}
+
+.pagination .page-link:hover {
+  background-color: #34495e;
+  color: #fff;
+}
+
+.form-check {
+  margin-bottom: 10px;
+}
+.form-check-label {
+  margin-left: 5px;
+}
+
+.hidden {
+  display: none; 
+}
+
+.children {
+  margin-left: 20px; 
+}
+
+.form-check-input {
+  cursor: pointer; 
+}

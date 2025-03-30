@@ -190,3 +190,24 @@ if (sort) {
     }
 }
 // End Sort
+
+
+// Category List
+document.addEventListener("DOMContentLoaded", function() {
+  const toggles = document.querySelectorAll(".category-toggle");
+
+  toggles.forEach(toggle => {
+    if (toggle.checked) {
+      const childrenDiv = toggle.closest(".category-item").nextElementSibling;
+      if (childrenDiv && childrenDiv.classList.contains("children")) {
+        childrenDiv.classList.remove("hidden");
+      }
+    }
+    toggle.addEventListener("change", function() {
+      const childrenDiv = this.closest(".category-item").nextElementSibling;
+      if (childrenDiv && childrenDiv.classList.contains("children")) {
+        childrenDiv.classList.toggle("hidden");
+      }
+    });
+  });
+});

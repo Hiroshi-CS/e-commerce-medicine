@@ -1,6 +1,6 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug 
-include ../../mixins/select-tree.pug 
+include ../../mixins/render-category.pug 
 
 block main
   if(role.permissions.includes("products_edit")) 
@@ -24,15 +24,10 @@ block main
           value = product.title
           required
         )
-      div(class = "form-group")
-        label(for="product_category_id") Danh mục
-        select(
-          name = "product_category_id"
-          id = "product_category_id"
-          class = "form-control"
-        )
-          option -- Chọn danh mục --
-          +select-tree(records,"-- ",product.product_category_id)
+      div(class="form-group")
+        label Danh mục
+        div(class="row")
+          +renderCategories(records)
       div(class = "form-group form-check form-check-inline")
         input(
           type = "radio"
@@ -61,6 +56,33 @@ block main
           name = "description"
           rows = "5"
         ) #{product.description}
+      div(class = "form-group")
+        label(for = "activeIngredients") Thành phần hoạt chất
+        input(
+          type = "text"
+          class = "form-control"
+          id = "ingredients"
+          name = "activeIngredients"
+          value = activeIngredients
+        ) 
+      div(class = "form-group")
+        label(for="dosage") Liều lượng
+        input(
+          type = "text"
+          class = "form-control"
+          id = "dosage"
+          name = "dosage"
+          value = product.dosage
+        ) 
+      div(class = "form-group")
+        label(for="expire") Ngày hết hạn
+        input(
+          type = "date"
+          class = "form-control"
+          id = "expire"
+          name = "expirationDate"
+          value = product.expirationDate
+        )
       div(class = "form-group")
         label(for = "price") Giá
         input(
