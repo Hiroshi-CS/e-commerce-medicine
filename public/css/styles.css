@@ -170,6 +170,7 @@ a {
   margin-left: 5px;
 }
 
+
 /* Sub-menu */
 .category-dropdown {
   padding: 10px;
@@ -195,7 +196,6 @@ a {
 .ml-2 {
   margin-left: 10px; /* Khoảng cách icon mũi tên */
 }
-
 .inner-tools ul {
   list-style: none;
   display: flex;

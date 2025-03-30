@@ -28,14 +28,10 @@ header.header
             li 
               a(href="/") Trang chủ
             - const pathCategory = "/products"
-            li(class="dropdown sub-menu")
-              a.dropdown-toggle(
-                href=pathCategory data-bs-toggle="dropdown" 
-                aria-expanded="false")
-                | Sản phẩm 
-                i.fas.fa-chevron-down
-              ul.dropdown-menu.category-dropdown
-                +renderSubMenu(layoutProductCategory)
+            li(class="sub-menu")
+              a(href=pathCategory) Sản phẩm 
+                i(class="fas fa-chevron-down dropdown-arrow")
+              +sub-menu(layoutProductCategory, pathCategory)
       .col-3
         .inner-tools
           ul.second-links.flexitem 
