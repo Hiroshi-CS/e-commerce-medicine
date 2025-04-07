@@ -18,7 +18,16 @@ const messageSchema = new mongoose.Schema({
         enum: ["sent", "delivered", "read"],
         default: "sent",
     },
+    conversationId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Conversation",
+        required: true,
+    },
     createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+    updatedAt: {
         type: Date,
         default: Date.now,
     },

@@ -5,7 +5,7 @@ const sessionSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    userID: {
+    userId: {
         type: String,
         required: true,
     },
@@ -16,6 +16,10 @@ const sessionSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
+    },
+    connected: {
+        type: Boolean,
+        default: false,
     },
     createdAt: {
         type: Date,

@@ -15,18 +15,21 @@ const conversationSchema = new mongoose.Schema({
         maxLength: 2,
         required: true,
     },
-    lastMessage: String,
+
+    lastMessage: {
+        type: String,
+        default: "",
+    },
+
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+
     updateAt: {
         type: Date,
         default: Date.now,
     },
-    // messages is the array of message ids
-    messages: [
-        {
-            type: String,
-            required: true,
-        },
-    ],
 });
 
 const Conversations = mongoose.model("Conversation", conversationSchema, "Conversations");

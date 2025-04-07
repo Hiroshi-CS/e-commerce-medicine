@@ -85,11 +85,9 @@ io.use(async (socket, next) => {
             socket.role = session.role;
             socket.connected = true;
 
-            //save session to database
-            session.connected = true; // set connected to true
-            session.updatedAt = Date.now(); // update time
-            await session.save(); // save session to database
-            return next();
+            // update and save session
+            session.connected = true;
+            session.updatedAt = Date.now();
         } else {
             const username = socket.handshake.auth.username;
             if (!username) {
@@ -103,17 +101,20 @@ io.use(async (socket, next) => {
             socket.role = socket.handshake.auth.role;
             socket.connected = true; // set connected to true
 
-            // Save session to database
-            const newSession = new sessionChatModel({
+            // Create and save session to database
+            session = new sessionChatModel({
                 sessionId: socket.sessionID,
                 userId: socket.userID,
                 username: username,
                 role: socket.role,
             });
-
-            await newSession.save(); // save session to database
-            return next();
         }
+
+        // Save session to database
+        await session.save();
+
+        // next to middleware
+        return next();
     }
 });
 
@@ -135,16 +136,42 @@ io.on("connection", async (socket) => {
         2. Get session of admin for sender is user
     */
     const sessionUsers = null;
-    if (socket.role == "admin") {
-        sessionUsers = await sessionChatModel.find({}).select("-createdAt");
-    } else {
-        sessionUsers = await sessionChatModel
+    const roleUser = socket.role == "admin" ? "user" : "admin"; // get role of user
+
+    // Get session of user
+    sessionUsers = await sessionChatModel
+        .findOne({
+            role: roleUser,
+        })
+        .select("-createdAt");
+
+    // Get messages of session
+    const promiseGetMessagesForEachUser = sessionUsers.map(async (session) => {
+        const conversation = await conversationModel
             .findOne({
-                role: "admin",
+                listUsers: { $all: [socket.userID, session.userId] },
             })
-            .select("-createdAt");
-    }
-    socket.emit("sessionUsers", sessionUsers); // Send session another people to user
+            .select("_id");
+
+        if (conversation) {
+            const messages = await messagesModel
+                .find({
+                    conversationId: conversation._id,
+                })
+                .sort({
+                    createdAt: -1,
+                })
+                .limit(10)
+                .lean();
+
+            session.messages = messages; // add messages to session
+        }
+
+        return session; // return session of user
+    });
+
+    await Promise.all(promiseGetMessagesForEachUser); // wait for all messages
+    socket.emit("sessionUsers", promiseGetMessagesForEachUser); // Send session another people to user
 
     // Send session to user
     socket.emit("session", {
@@ -176,48 +203,53 @@ io.on("connection", async (socket) => {
 
             const session = await sessionChatModel.findOne({ sessionId: socket.sessionID });
             if (session) {
+                // update and save session
                 session.connected = false;
                 session.updatedAt = Date.now();
-                await session.save(); // update session
+                await session.save();
             }
         }
     });
 
     // Handle send private message
     socket.on("private message", async ({ content, to }) => {
+        // Create message
         const message = {
             content,
             from: socket.userID,
             to,
         };
-        // Save message to database
-        const conversation = await conversationModel.findOne({
-            listUsers: { $all: [socket.userID, to] },
-        });
 
-        // Create new message
-        const newMessage = new messagesModel({
-            sender: socket.userID,
-            message: content,
-        });
+        // Save message to database
+        const conversation = await conversationModel
+            .findOne({
+                listUsers: { $all: [socket.userID, to] },
+            })
+            .select("_id");
 
         // check conversation exist
         if (!conversation) {
             // create new conversation
             conversation = new conversationModel({
-                listUsers: [socket.userID, to], // add users to conversation
-                lastMessage: content, // last message
-                updateAt: Date.now(), // update time
+                listUsers: [socket.userID, to],
+                lastMessage: content,
+                updateAt: Date.now(),
             });
         }
 
+        // Create new message
+        const newMessage = new messagesModel({
+            sender: socket.userID,
+            message: content,
+            conversationId: conversation._id,
+        });
+
         await newMessage.save(); // save message to database
 
-        const newMessageId = newMessage._id.toString(); // convert to string
-        conversation.messages.push(newMessageId); // push message id to conversation
-        conversation.lastMessage = content; // update last message
-        conversation.updateAt = Date.now(); // update time
-        await conversation.save(); // save conversation to database
+        // Update conversation and save
+        conversation.lastMessage = content;
+        conversation.updateAt = Date.now();
+        await conversation.save();
 
         socket.to(to).to(socket.userID).emit("private message", message);
     });
