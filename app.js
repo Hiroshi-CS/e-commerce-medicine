@@ -80,7 +80,7 @@ io.use(async (socket, next) => {
         const session = await sessionChatModel.findOne({ sessionId: sessionID });
         if (session) {
             socket.sessionID = sessionID;
-            socket.userID = session.userID;
+            socket.userID = session.userId;
             socket.username = session.username;
             socket.role = session.role;
             socket.connected = true;
@@ -107,6 +107,7 @@ io.use(async (socket, next) => {
                 userId: socket.userID,
                 username: username,
                 role: socket.role,
+                connected: true,
             });
         }
 
