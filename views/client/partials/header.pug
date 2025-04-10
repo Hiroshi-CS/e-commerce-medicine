@@ -27,11 +27,32 @@ header.header
           ul.second-links.flexitem 
             li 
               a(href="/") Trang chủ
-            - const pathCategory = "/products"
-            li(class="sub-menu")
-              a(href=pathCategory) Sản phẩm 
-                i(class="fas fa-chevron-down dropdown-arrow")
-              +sub-menu(layoutProductCategory, pathCategory)
+            li.dropdown
+              a#productDropdownMenuLink.dropdown-toggle(
+                href="/products"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              )
+                | Sản phẩm
+              ul.dropdown-menu.mega-menu(aria-labelledby="productDropdownMenuLink")
+                li
+                  .container-fluid.px-4.py-3
+                    .row.g-3 
+                      .col-lg-7.col-md-6
+                        .all-categories-list
+                          if layoutProductCategory && layoutProductCategory.length > 0
+                            each categoryL1 in layoutProductCategory
+                              .category-group.mb-3 
+                                h6.mega-menu-title
+                                  a(href=`/products/${categoryL1.slug}`) #{categoryL1.title}
+                                if categoryL1.children && categoryL1.children.length > 0
+                                  ul.list-unstyled.mega-menu-list
+                                    each categoryL2 in categoryL1.children
+                                      li
+                                        a(href=`/products/${categoryL2.slug}`) #{categoryL2.title}
+                          else
+                            p.text-muted Không có danh mục nào.
 
       .col-3
         .inner-tools
@@ -40,11 +61,14 @@ header.header
               a(href="/cart") Giỏ hàng
                 i.fas.fa-shopping-cart 
                 | (#{miniCart ? miniCart.totalQuantity : "0"})
-            li 
-              i.fas.fa-language
-              |  LANG
-            li
-              i.fas.fa-bell 
+            - if (user)
+              li
+                a(
+                  href = "/chat"
+                )
+                  i.fas.fa-regular.fa-comment               
+              li
+                i.fas.fa-bell 
       .col-1
         .inner-avatar 
           ul.second-links.flexitem 
@@ -53,9 +77,8 @@ header.header
                 a(href="/user/login") Đăng nhập
             - else
               li.dropdown
-                a#dropdownMenuButton.dropdown-toggle(href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false")
+                a.dropdownMenuButton.dropdown-toggle(href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false")
                   img.rounded-circle(src=user.avatar || "/uploads/avatar-default.jpg" alt="Avatar")
-
                 ul.dropdown-menu.dropdown-menu-end(aria-labelledby="dropdownMenuButton")
                   li
                     a.dropdown-item(href=`/user/info/${user.id}`) Trang cá nhân
@@ -67,4 +90,3 @@ header.header
                     hr.dropdown-divider
                   li
                     a.dropdown-item(href="/user/logout") Đăng xuất
-

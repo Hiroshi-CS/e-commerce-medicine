@@ -1,0 +1,37 @@
+
+button.circular-button(type="button" open-chat-button)#openChatBtn
+  i.fas.fa-regular.fa-comment
+#chat.chat-panel(style="display: none;")
+  .chat-content
+    .inner-head 
+        span Admin 
+        span#closeChatBtn.close-button.text-end X
+    .chat(
+      user-info=user ? JSON.stringify(user) : '{}'
+      conversation-id= conv ? conv._id : ''
+    ) 
+      .inner-body
+        ul#messages
+          if conv.messages.length > 0
+            each msg in conv.messages
+              li
+                if msg.sender.senderId == user._id.toString()
+                  .inner-outgoing
+                    .inner-content= msg.message
+                    small= moment(msg.createdAt).format("HH:mm")
+                else
+                  .inner-incoming
+                    .inner-name= admin ? admin.fullName : 'Admin'
+                    .inner-content= msg.message
+                    small= moment(msg.createdAt).format("HH:mm")
+      .inner-foot
+        form.inner-form(onsubmit="return false;")
+          input#messageInput.chat-input(
+            type="text"
+            placeholder="Nhập nội dung..."
+          )
+          button(type="submit")
+            i.fa-solid.fa-paper-plane
+
+script(src="/socket.io/socket.io.js")
+script(src="/js/chat-panel.js")

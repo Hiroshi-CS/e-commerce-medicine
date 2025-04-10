@@ -8,12 +8,37 @@ const accountSchema = new mongoose.Schema(
         password: String,
         token: {
             type: String,
-            default: generate.genarateRandomString(20),
+            default: generate.generateRandomString(20),
         },
-        phone: String,
-        avatar: String,
+        phone: {
+          type: String,
+          default: "",
+        },
+        address: String, 
+        avatar: {
+          type: String,
+          default: "",
+        },
         role_id: String,
-        status: String,
+        orders: [
+            {
+                products: [
+                    {
+                        product_id: String,
+                        quantity: Number,
+                    },
+                ],
+                totalPrice: String,
+                createAt: {
+                    type: Date,
+                    default: Date.now,
+                },
+            },
+        ], 
+        status: {
+            type: String,
+            default: "active",
+        },
         deleted: {
             type: Boolean,
             default: false,

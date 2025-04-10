@@ -463,3 +463,129 @@ body {
 .form-check-input {
   cursor: pointer; 
 }
+
+/* Chat */
+.chat {
+  background-color: #fff;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.chat ul#messages {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.chat .inner-body {
+  padding: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+}
+
+.chat .inner-incoming {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.chat .inner-incoming .inner-name {
+  font-size: 12px;
+  font-weight: bold;
+  color: #6c757d; 
+  margin-bottom: 3px;
+}
+
+.chat .inner-incoming .inner-content {
+  background-color: #e9ecef;
+  color: #212529;
+  padding: 8px 12px;
+  border-radius: 15px 15px 15px 0;
+  display: inline-block;
+  max-width: 75%;
+  word-wrap: break-word;
+  font-size: 14px;
+}
+
+.chat .inner-outgoing {
+  margin-bottom: 15px;
+  text-align: right;
+}
+
+.chat .inner-outgoing .inner-content {
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 15px 15px 0 15px;
+  display: inline-block;
+  max-width: 75%;
+  word-wrap: break-word;
+  font-size: 14px;
+}
+
+.chat .inner-foot {
+  padding: 10px 20px;
+  border-top: 1px solid #dee2e6;
+  background-color: #fff;
+}
+
+.chat .inner-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat .inner-form input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 20px;
+  outline: none;
+  font-size: 14px;
+}
+.chat .inner-form input:focus {
+  border-color: #80bdff;
+}
+
+.chat .inner-form button {
+  background: #0056b3;
+  border: 1px solid #0056b3;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.inner-form button:hover {
+  background-color: #004085;
+}
+
+.inner-form button i {
+  color: #fff;
+  font-size: 16px;
+}
+
+.user-disconnected,
+.user-reconnected {
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0;
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 4px;
+}
+.user-disconnected {
+  color: #721c24;
+  background-color: #f8d7da;
+}
+.user-reconnected {
+  color: #155724;
+  background-color: #d4edda;
+}
+/* End Chat */

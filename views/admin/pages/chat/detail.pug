@@ -1,0 +1,36 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+
+block main 
+  .container.my-3
+    .row 
+      .col-12
+        +box-head(pageTitle + ` ${user.fullName}`) 
+       
+    .row 
+      .col-12
+        .chat(
+          user-info=JSON.stringify(admin)
+          conversation-id=conversation._id
+        )
+          .inner-body
+            ul#messages
+              each msg in messages
+                li
+                  if msg.sender.senderId == admin._id.toString()
+                    .inner-outgoing
+                      .inner-content= msg.message
+                      small= moment(msg.createdAt).format("HH:mm:ss")
+                  else
+                    .inner-incoming
+                      .inner-name= user.fullName 
+                      .inner-content= msg.message
+                      small= moment(msg.createdAt).format("HH:mm:ss")
+          .inner-foot
+            form.inner-form(onsubmit="return false;")
+              input#messageInput.chat-input(
+                type="text",
+                placeholder="Nhập nội dung..."
+              )
+              button(type="submit")
+                i.fa-solid.fa-paper-plane

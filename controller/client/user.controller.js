@@ -1,19 +1,21 @@
-const md5 = require("md5");
+const Account = require("../../models/account.model");
 
-const User = require("../../models/user.model");
+const md5 = require("md5");
+const Role = require("../../models/role.model.js");
+
 const ForgotPassword = require("../../models/forgot-password.model");
 
 const generateHelper = require("../../helper/generate");
 const sendMailHelper = require("../../helper/sendMail");
 const Product = require("../../models/product.model");
 
-//[GET] /user/register
+//[GET] /account/register
 module.exports.register = async (req, res) => {
     res.render("client/pages/user/register");
 };
-//[POST] /user/register
+//[POST] /account/register
 module.exports.registerPost = async (req, res) => {
-    const existEmail = await User.findOne({
+    const existEmail = await Account.findOne({
         email: req.body.email,
         deleted: false,
     });
@@ -23,65 +25,70 @@ module.exports.registerPost = async (req, res) => {
         return;
     }
     req.body.password = md5(req.body.password);
+    const role = await Role.findOne({
+        title: "Khách hàng",
+        deleted: false,
+    });
+    req.body.role_id = role._id;
 
-    const user = new User(req.body);
-    await user.save();
-    res.cookie("tokenUser", user.tokenUser);
+    const account = new Account(req.body);
+    await account.save();
+    res.cookie("token", account.token);
     res.redirect("/");
 };
-//[GET] /user/login
+//[GET] /account/login
 module.exports.login = async (req, res) => {
     res.render("client/pages/user/login");
 };
-//[POST] /user/register
+//[POST] /account/login
 module.exports.loginPost = async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    const user = await User.findOne({
+    const account = await Account.findOne({
         email: req.body.email,
     });
-    if (!user) {
+    if (!account) {
         req.flash("error", "Email không tồn tại");
         res.redirect("back");
         return;
     }
-    if (md5(password) != user.password) {
+    if (md5(password) != account.password) {
         req.flash("error", "Sai mật khẩu!");
         res.redirect("back");
         return;
     }
-    if (user.status == "inactive") {
+    if (account.status == "inactive") {
         req.flash("error", "Tài khoản đang bị khóa!");
         res.redirect("back");
         return;
     }
 
-    res.cookie("tokenUser", user.tokenUser);
+    res.cookie("token", account.token);
     res.redirect("/");
 };
 
-//[GET] /user/logout
+//[GET] /account/logout
 module.exports.logout = async (req, res) => {
-    res.clearCookie("tokenUser");
+    res.clearCookie("token");
     res.redirect("/");
 };
 
-//[GET] /user/password/forgot
+//[GET] /account/password/forgot
 module.exports.forgotPassword = async (req, res) => {
     res.render("client/pages/user/forgot-password", {
         pasgeTitle: "Lấy lại mật khẩu",
     });
 };
 
-//[POST] /user/password/forgot
+//[POST] /account/password/forgot
 module.exports.forgotPasswordPost = async (req, res) => {
     const email = req.body.email;
-    const user = await User.findOne({
+    const account = await Account.findOne({
         email: email,
         deleted: false,
     });
-    if (!user) {
+    if (!account) {
         req.flash("error", "Email không tồn tại");
         res.redirect("back");
         return;
@@ -108,7 +115,7 @@ module.exports.forgotPasswordPost = async (req, res) => {
     res.redirect(`/user/password/otp?email=${email}`);
 };
 
-//[GET] /user/password/otp
+//[GET] /account/password/otp
 module.exports.otpPassword = async (req, res) => {
     const email = req.query.email;
 
@@ -118,7 +125,7 @@ module.exports.otpPassword = async (req, res) => {
     });
 };
 
-//[POST] /user/password/otp
+//[POST] /account/password/otp
 module.exports.otpPasswordPost = async (req, res) => {
     const email = req.body.email;
     const otp = req.body.otp;
@@ -138,27 +145,27 @@ module.exports.otpPasswordPost = async (req, res) => {
         return;
     }
 
-    const user = await User.findOne({
+    const account = await Account.findOne({
         email: email,
     });
 
-    res.cookie("tokenUser", user.tokenUser);
+    res.cookie("token", account.token);
     res.redirect("/user/password/reset");
 };
 
-//[GET] /user/password/reset
+//[GET] /account/password/reset
 module.exports.resetPassword = async (req, res) => {
     res.render("client/pages/user/reset-password");
 };
 
-//[POST] /user/password/reset
+//[POST] /account/password/reset
 module.exports.resetPasswordPost = async (req, res) => {
     const password = req.body.password;
-    const tokenUser = req.cookies.tokenUser;
+    const token = req.cookies.token;
 
-    await User.updateOne(
+    await Account.updateOne(
         {
-            tokenUser: tokenUser,
+            token: token,
         },
         {
             password: md5(password),
@@ -167,17 +174,17 @@ module.exports.resetPasswordPost = async (req, res) => {
     res.redirect("/");
 };
 
-//[GET] /user/info/:id
+//[GET] /account/info/:id
 module.exports.userInfo = async (req, res) => {
     const id = req.params.id;
 
-    const user = await User.findOne({
+    const account = await Account.findOne({
         _id: id,
         status: "active",
         deleted: false,
     });
     let orders = [];
-    for (order of user.orders) {
+    for (order of account.orders) {
         let products = [];
         for (product of order.products) {
             let productInfo = await Product.findOne({
@@ -192,7 +199,7 @@ module.exports.userInfo = async (req, res) => {
     }
     res.render("client/pages/user/info", {
         pageTitle: "Trang cá nhân",
-        user: user,
+        account: account,
         orders: orders,
     });
 };
@@ -203,14 +210,14 @@ module.exports.orderDetail = (req, res) => {
     res.redirect("back");
 };
 module.exports.editPatch = async (req, res) => {
-    const userToken = req.cookies.tokenUser;
+    const accountToken = req.cookies.token;
     if (req.file) {
         req.body.avatar = `/uploads/${req.file.filename}`;
     } else {
         delete req.body.avatar;
     }
     try {
-        await User.updateOne({ tokenUser: userToken }, req.body);
+        await Account.updateOne({ token: accountToken }, req.body);
         req.flash("success", "Cập nhật thành công!");
         res.redirect("back");
     } catch (error) {

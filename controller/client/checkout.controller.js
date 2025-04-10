@@ -1,7 +1,7 @@
 const Cart = require("../../models/cart.model");
 const Product = require("../../models/product.model");
 const Order = require("../../models/order.model");
-const User = require("../../models/user.model");
+const User = require("../../models/account.model");
 
 const productHelper = require("../../helper/products");
 
@@ -24,7 +24,7 @@ module.exports.index = async (req, res) => {
         newProducts = productHelper.priceNewProducts(products);
     }
     const user = await User.findOne({
-        tokenUser: req.cookies.tokenUser,
+        token: req.cookies.token,
     });
     res.render("client/pages/checkout/index", {
         pageTitle: "Đặt hàng",
@@ -82,7 +82,7 @@ module.exports.success = async (req, res) => {
     const order = await Order.findOne({
         _id: req.params.orderId,
     });
-    const tokenUser = req.cookies.tokenUser;
+    const token = req.cookies.token;
     for (const product of order.products) {
         const productInfo = await Product.findOne({
             _id: product.product_id,
@@ -104,7 +104,7 @@ module.exports.success = async (req, res) => {
 
     await User.updateOne(
         {
-            tokenUser: tokenUser,
+            token: token,
         },
         {
             $push: {

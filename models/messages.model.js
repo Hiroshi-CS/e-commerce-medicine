@@ -1,34 +1,30 @@
 const mongoose = require("mongoose");
-const slug = require("mongoose-slug-updater");
-
-mongoose.plugin(slug);
 
 const messageSchema = new mongoose.Schema({
   sender: {
-    type: String,
-    ref: "User",
-    required: true
+    senderId: String,
+    senderName: String,
   },
   message: {
     type: String,
     required: true,
-    trim: true
-  },
-  isAdmin: {
-    type: Boolean,
-    required: true
+    trim: true,
   },
   status: {
     type: String,
     enum: ["sent", "delivered", "read"],
-    default: "sent"
+    default: "sent",
   },
   createdAt: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-const Messages = mongoose.model("Message", messageSchema, "Messages");
+const Messages = mongoose.model("Message", messageSchema);
 
-module.exports = Messages;
+module.exports = { messageSchema, Messages };
