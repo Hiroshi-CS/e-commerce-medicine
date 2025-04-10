@@ -1,8 +1,8 @@
 // socket-server.io
 const { Server } = require("socket.io");
 const Conversation = require("../models/conversation.model");
-const sessionChatModel = require("../models/sessionChat.model"); 
-const generate = require("../helper/generate"); 
+const sessionChatModel = require("../models/sessionChat.model");
+const generate = require("../helper/generate");
 
 function initSocketServer(httpServer) {
   const io = new Server(httpServer, {
@@ -15,12 +15,11 @@ function initSocketServer(httpServer) {
   io.use(async (socket, next) => {
     const sessionID = socket.handshake.auth.sessionID;
     if (sessionID) {
-      
       const session = await sessionChatModel.findOne({ sessionId: sessionID });
       if (session) {
         socket.sessionID = sessionID;
-        socket.userId = session.userId; 
-        socket.userName = session.username; 
+        socket.userId = session.userId;
+        socket.userName = session.username;
         socket.role = session.role;
         socket.connected = true;
 
@@ -36,11 +35,11 @@ function initSocketServer(httpServer) {
     if (!userName) {
       return next(new Error("invalid username"));
     }
-    
+
     socket.sessionID = generate.generateRandomString(20);
-    socket.userId = socket.handshake.auth.userId || `guest_${socket.sessionID}`; 
+    socket.userId = socket.handshake.auth.userId || `guest_${socket.sessionID}`;
     socket.userName = userName;
-    socket.role = socket.handshake.auth.role || "user"; 
+    socket.role = socket.handshake.auth.role || "user";
     socket.connected = true;
 
     // Lưu session vào database
@@ -69,8 +68,8 @@ function initSocketServer(httpServer) {
     socket.on("joinRoom", async (conversationId, userId, userName) => {
       socket.join(conversationId);
       socket.conversationId = conversationId;
-      socket.userId = userId || socket.userId; 
-      socket.userName = userName || socket.userName; 
+      socket.userId = userId || socket.userId;
+      socket.userName = userName || socket.userName;
     });
 
     // Handle private message
@@ -97,15 +96,13 @@ function initSocketServer(httpServer) {
       io.to(socket.conversationId).emit("newMessage", newMessage);
     });
 
-    // Handle disconnect 
+    // Handle disconnect
     socket.on("disconnect", async () => {
       const matchingSockets = await io.in(socket.conversationId).fetchSockets();
       const isStillConnected = matchingSockets.length > 0;
 
       if (!isStillConnected) {
-        socket.broadcast
-          .to(socket.conversationId)
-          .emit("User disconnected", socket.userName);
+        socket.broadcast.to(socket.conversationId).emit("User disconnected", socket.userName);
 
         const session = await sessionChatModel.findOne({ sessionId: socket.sessionID });
         if (session) {
