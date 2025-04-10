@@ -9,6 +9,11 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const moment = require("moment");
 
+const generateRandomString = require("./helper/generate.js");
+const sessionChatModel = require("./models/sessionChat.model.js");
+const conversationModel = require("./models/conversation.model.js");
+const messagesModel = require("./models/messages.model.js");
+
 require("dotenv").config(); // Init dotenv
 
 const database = require("./config/database");
