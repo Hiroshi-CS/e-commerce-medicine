@@ -62,13 +62,10 @@ header.header
                 i.fas.fa-shopping-cart 
                 | (#{miniCart ? miniCart.totalQuantity : "0"})
             - if (user)
-              li
-                a(
-                  href = "/chat"
-                )
-                  i.fas.fa-regular.fa-comment               
-              li
-                i.fas.fa-bell 
+              - if (user.role_id == adminRole)
+                li 
+                  a(href="/admin/dashboard") Trang tổng quan
+              
       .col-1
         .inner-avatar 
           ul.second-links.flexitem 
