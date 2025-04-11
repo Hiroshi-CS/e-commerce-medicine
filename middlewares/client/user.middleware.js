@@ -8,12 +8,12 @@ module.exports.infoUser = async (req, res, next) => {
             deleted: false,
         }).select("-password");
         if (user){
-            const role = await Role.findOne({
-                title: "admin"
+            const adminRoleInfo = await Role.findOne({
+                title: "admin",
             })
-            res.locals.adminRole = role.id;
             req.user = user;
             res.locals.user = user;
+            res.locals.adminId = adminRoleInfo.id;
         } 
     }
     return next();

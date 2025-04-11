@@ -13,7 +13,7 @@ if (chat && form && input && messages) {
       sessionID: localStorage.getItem("sessionID") || null, 
       userId: userInfo._id || null,
       username: userInfo.fullName,
-      role: "admin", 
+      role: userInfo.role_id, 
     },
   });
 

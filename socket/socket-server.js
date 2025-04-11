@@ -47,8 +47,8 @@ function initSocketServer(httpServer) {
     socket.userId = socket.handshake.auth.userId || `guest_${socket.sessionID}`;
     socket.userName = userName;
     if (socket.handshake.auth.role) {
-      const role = await Role.findById(socket.handshake.auth.role);
-      socket.role = role.title;
+      const adminRole = await Role.findById(socket.handshake.auth.role);
+      socket.role = adminRole.title;
     } else {
       socket.role = "user";
     }

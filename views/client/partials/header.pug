@@ -61,11 +61,6 @@ header.header
               a(href="/cart") Giỏ hàng
                 i.fas.fa-shopping-cart 
                 | (#{miniCart ? miniCart.totalQuantity : "0"})
-            - if (user)
-              - if (user.role_id == adminRole)
-                li 
-                  a(href="/admin/dashboard") Trang tổng quan
-              
       .col-1
         .inner-avatar 
           ul.second-links.flexitem 
@@ -81,6 +76,12 @@ header.header
                     a.dropdown-item(href=`/user/info/${user.id}`) Trang cá nhân
                   li
                     hr.dropdown-divider
+                  - if (user)
+                    - if (user.role_id == adminId)
+                      li 
+                        a.dropdown-item(href="/admin/dashboard") Trang tổng quan
+                      li
+                        hr.dropdown-divider
                   li
                     a.dropdown-item(href="/user/password/reset") Đổi mật khẩu
                   li
