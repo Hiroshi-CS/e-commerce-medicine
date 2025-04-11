@@ -6,31 +6,14 @@ const slug = require("mongoose-slug-updater");
 mongoose.plugin(slug);
 
 const conversationSchema = new mongoose.Schema({
-    listUsers: {
-        type: Array,
-        default: [
-            {
-                type: String,
-            },
-        ],
-        maxLength: 2,
-        required: true,
-    },
-
-    lastMessage: {
-        type: String,
-        default: "",
-    },
-
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-
+    user_id: String,
+    admin_id: String,
+    lastMessage: String,
     updateAt: {
         type: Date,
         default: Date.now,
     },
+    messages: [messageSchema],
 });
 
 const Conversations = mongoose.model(
