@@ -23,6 +23,8 @@ function initSocketServer(httpServer) {
         socket.sessionID = sessionID;
         socket.userId = session.userId;
         socket.userName = session.username;
+        socket.userId = session.userId;
+        socket.userName = session.username;
         socket.role = session.role;
         socket.connected = true;
 
@@ -39,7 +41,9 @@ function initSocketServer(httpServer) {
       return next(new Error("invalid username"));
     }
 
+
     socket.sessionID = generate.generateRandomString(20);
+    socket.userId = socket.handshake.auth.userId || `guest_${socket.sessionID}`;
     socket.userId = socket.handshake.auth.userId || `guest_${socket.sessionID}`;
     socket.userName = userName;
     if (socket.handshake.auth.role) {
@@ -77,6 +81,8 @@ function initSocketServer(httpServer) {
     socket.on("joinRoom", async (conversationId, userId, userName) => {
       socket.join(conversationId);
       socket.conversationId = conversationId;
+      socket.userId = userId || socket.userId;
+      socket.userName = userName || socket.userName;
       socket.userId = userId || socket.userId;
       socket.userName = userName || socket.userName;
     });
@@ -149,6 +155,7 @@ function initSocketServer(httpServer) {
     });
 
     // Handle disconnect
+    // Handle disconnect
     socket.on("disconnect", async () => {
       const matchingSockets = await io.in(socket.conversationId).fetchSockets();
       const isStillConnected = matchingSockets.length > 0;
@@ -185,3 +192,4 @@ function initSocketServer(httpServer) {
 }
 
 module.exports = initSocketServer;
+
