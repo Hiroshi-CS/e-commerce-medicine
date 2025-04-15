@@ -44,7 +44,6 @@ function initSocketServer(httpServer) {
 
     socket.sessionID = generate.generateRandomString(20);
     socket.userId = socket.handshake.auth.userId || `guest_${socket.sessionID}`;
-    socket.userId = socket.handshake.auth.userId || `guest_${socket.sessionID}`;
     socket.userName = userName;
     if (socket.handshake.auth.role) {
       const adminRole = await Role.findById(socket.handshake.auth.role);
@@ -69,6 +68,8 @@ function initSocketServer(httpServer) {
   
   io.on("connection", (socket) => {
 
+    socket.join(socket.userId);
+
     socket.emit("session", {
       sessionID: socket.sessionID,
       userId: socket.userId,
@@ -81,8 +82,6 @@ function initSocketServer(httpServer) {
     socket.on("joinRoom", async (conversationId, userId, userName) => {
       socket.join(conversationId);
       socket.conversationId = conversationId;
-      socket.userId = userId || socket.userId;
-      socket.userName = userName || socket.userName;
       socket.userId = userId || socket.userId;
       socket.userName = userName || socket.userName;
     });
@@ -157,12 +156,10 @@ function initSocketServer(httpServer) {
     // Handle disconnect
     // Handle disconnect
     socket.on("disconnect", async () => {
-      const matchingSockets = await io.in(socket.conversationId).fetchSockets();
-      const isStillConnected = matchingSockets.length > 0;
-      const isDuplicatedUser = matchingSockets.find(
-        (s) => s.userId === socket.userId
-      );
-      if (isStillConnected && !isDuplicatedUser) {
+      
+      const matchingSockets = await io.in(socket.userId).fetchSockets();
+      const isStillConnected = matchingSockets.length == 0;
+      if (isStillConnected) {
         // Check if user is role admin
         /*
                 1. admin when disconnect will send notification to all user

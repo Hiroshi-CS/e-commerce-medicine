@@ -5,7 +5,7 @@ block main
   .container.my-3
     .row 
       .col-12
-        +box-head(pageTitle + ` ${user.fullName}`) 
+        +box-head(pageTitle + ` ${userName}`) 
        
     .row 
       .col-12
@@ -23,7 +23,7 @@ block main
                       small= moment(msg.createdAt).format("HH:mm:ss")
                   else
                     .inner-incoming
-                      .inner-name= user.fullName 
+                      .inner-name= userName
                       .inner-content= msg.message
                       small= moment(msg.createdAt).format("HH:mm:ss")
           .inner-foot

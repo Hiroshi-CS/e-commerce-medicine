@@ -7,10 +7,13 @@ block main
       .col-12
         +box-head(pageTitle) 
 
-  each conversation in conversations
-    a(href=`/admin/conversations/${conversation._id}` class="chat-card")
-      .chat-info
-        img.avatar(src=conversation.userAvatar alt="Avatar")
-        .chat-meta
-          h3= conversation.userName
-          p Cập nhật gần nhất: #{new Date(conversation.updateAt).toLocaleString()}
+  .chat-card
+    each conversation in conversations
+      a(href=`/admin/conversations/${conversation._id}` class="chat-card")
+        .chat-info
+          img.avatar(
+            src=conversation.userAvatar || "/uploads/avatar-default.jpg" 
+            alt="Avatar")
+          .chat-meta
+            h3= conversation.userName
+            p Cập nhật gần nhất: #{new Date(conversation.updateAt).toLocaleString()}

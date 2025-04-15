@@ -1,3 +1,4 @@
+/* Reset default styles */
 :root {
   --font-geist-sans: 'Geist', sans-serif;
 }
@@ -7,21 +8,10 @@
   padding: 0;
   box-sizing: border-box;
   font-family: var(--font-geist-sans);
-  /* day la cai font mac dinh ma nextjs ma no xai ne
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"], */
-  /* });
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"], */
-  /* }); */
 }
 
 body {
   font-family: "Open Sans", sans-serif;
-  font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
   font-variation-settings: "wdth" 100;
@@ -31,12 +21,12 @@ body {
   min-height: 100vh;
   font-size: 1rem;
   color: #212529;
-  background-color: #ffffff;
+  background-color: #e6f3f3; /* Giữ nguyên màu nền nhẹ nhàng */
 }
 
 /* Container chung */
 .container {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 15px;
 }
@@ -51,25 +41,29 @@ body {
 a {
   text-decoration: none;
   display: inline-block;
-  color: #0056b3;
+  color: #003366; /* Xanh dương đậm làm màu link chính */
   transition: color 0.3s ease;
 }
 a:hover {
-  color: #004085;
+  color: #002244; /* Xanh dương đậm hơn khi hover */
 }
 
 /* Top Header */
 .top-header {
-  background-color: #004085;
+  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
   padding: 5px 0;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid #e6f3f3;
 }
 .top-header .flexitem {
   justify-content: space-between;
   align-items: center;
 }
+.top-header span {
+  color: #f0f0f0;
+  margin: 0 10px;
+}
 .top-header a {
-  color: #f8f9fa;
+  color: #f0f0f0;
   margin: 0 10px;
   transition: color 0.3s ease;
 }
@@ -79,14 +73,14 @@ a:hover {
 
 /* Header */
 .header {
-  background-color: #ffffff;
-  border-bottom: 1px solid #dee2e6;
+  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  border-bottom: 1px solid #e6f3f3;
   padding: 10px 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 51, 102, 0.2); /* Bóng xanh dương nhẹ */
   font-family: "Lora", serif;
-  font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
+  color: #ffffff;
 }
 
 .header .row {
@@ -100,13 +94,13 @@ a:hover {
   text-decoration: none;
   font-size: 20px;
   font-weight: bold;
-  color: #0056b3;
+  color: #f0f0f0;
   white-space: nowrap;
 }
 
 .inner-logo .logo i {
   margin-right: 8px;
-  color: #0056b3;
+  color: #f0f0f0;
 }
 
 .inner-logo img {
@@ -122,7 +116,7 @@ a:hover {
 .search {
   display: flex;
   align-items: center;
-  border: 1px solid #dee2e6;
+  border: 1px solid #e6f3f3;
   border-radius: 4px;
   overflow: hidden;
   background-color: #fff;
@@ -132,7 +126,7 @@ a:hover {
   font-size: 18px;
   color: #ffffff;
   padding: 13px;
-  background-color: #0056b3;
+  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
 }
 
 .search input.form-control {
@@ -146,18 +140,17 @@ a:hover {
 }
 
 .search button {
-  background-color: #0056b3;
+  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
   color: #fff;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
-  transition: background-color 0.3s;
   border-radius: 0 4px 4px 0;
   line-height: 1.5;
 }
 
 .search button:hover {
-  background-color: #004085;
+  background: #002244; /* Xanh dương đậm hơn */
 }
 
 /* Menu */
@@ -168,10 +161,12 @@ a:hover {
   align-items: center;
   margin: 0;
   padding: 0;
+  flex-wrap: nowrap;
+  gap: 10px;
 }
 
 .inner-menu ul li {
-  margin-left: 20px;
+  margin-left: 0;
   position: relative;
 }
 .inner-menu ul li.dropdown {
@@ -179,7 +174,7 @@ a:hover {
 }
 
 .inner-menu ul li a {
-  color: #0056b3;
+  color: #f0f0f0;
   text-decoration: none;
   font-size: 16px;
   display: flex;
@@ -187,10 +182,11 @@ a:hover {
   padding: 5px 10px;
   transition: color 0.3s;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .inner-menu ul li a:hover {
-  color: #004085;
+  color: #ffffff;
 }
 
 .inner-menu ul li a i {
@@ -201,9 +197,9 @@ a:hover {
 .category-dropdown {
   padding: 10px;
   width: 300px;
-  background-color: #fff;
-  border: 1px solid #dee2e6;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff; /* Trắng tinh */
+  border: 1px solid #cccccc; /* Xám nhạt */
+  box-shadow: 0 2px 5px rgba(0, 51, 102, 0.1); /* Bóng xanh dương nhẹ */
 }
 
 .mega-menu.dropdown-menu {
@@ -214,9 +210,9 @@ a:hover {
   padding: 0;
   display: none;
   position: absolute;
-  background-color: #fff;
-  border: 1px solid #dee2e6;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  background-color: #ffffff; /* Trắng tinh */
+  border: 1px solid #cccccc; /* Xám nhạt */
+  box-shadow: 0 0.5rem 1rem rgba(0, 51, 102, 0.15); /* Bóng xanh dương */
   margin-top: 0.125rem;
   border-radius: 0.375rem;
   z-index: 1021;
@@ -237,23 +233,15 @@ a:hover {
   color: #212529;
   margin-bottom: 0.75rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #e6f3f3;
 }
 
-.mega-menu .mega-menu-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #212529;
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid #eee;
-}
 .mega-menu .mega-menu-title a {
   color: inherit;
   text-decoration: none;
 }
 .mega-menu .mega-menu-title a:hover {
-  color: #0056b3;
+  color: #003366; /* Xanh dương đậm */
   text-decoration: underline;
 }
 
@@ -275,8 +263,8 @@ a:hover {
 }
 
 .mega-menu .mega-menu-list li a:hover {
-  color: #0056b3;
-  background-color: #f8f9fa;
+  color: #003366; /* Xanh dương đậm */
+  background-color: #e6f3f3;
 }
 
 .inner-tools ul {
@@ -294,7 +282,7 @@ a:hover {
 }
 
 .inner-tools ul li a {
-  color: #0056b3;
+  color: #f0f0f0;
   text-decoration: none;
   font-size: 16px;
   display: flex;
@@ -305,7 +293,7 @@ a:hover {
 }
 
 .inner-tools ul li a:hover {
-  color: #004085;
+  color: #ffffff;
 }
 
 .inner-tools ul li a i {
@@ -335,9 +323,9 @@ a:hover {
   min-width: 150px;
   right: 0;
   left: auto;
-  border: 1px solid #dee2e6;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  border: 1px solid #e6f3f3;
+  box-shadow: 0 2px 5px rgba(0, 51, 102, 0.1); /* Bóng xanh dương nhẹ */
+  background-color: #ffffff; /* Trắng tinh */
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
   border-radius: 0.375rem;
@@ -364,29 +352,29 @@ a:hover {
 }
 
 .inner-avatar .dropdown-menu a.dropdown-item:hover {
-  color: #0056b3;
-  background-color: #f8f9fa;
+  color: #003366; /* Xanh dương đậm */
+  background-color: #e6f3f3;
 }
 
 .dropdown-divider {
   height: 0;
   margin: 0.5rem 0;
   overflow: hidden;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid #e6f3f3;
 }
 
 /* Box-head */
 .box-head {
   margin-bottom: 30px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid #e6f3f3;
 }
 
 .box-head .inner-title {
   margin-bottom: 0;
   font-size: 24px;
   font-weight: 600;
-  color: #0056b3;
+  color: #003366; /* Xanh dương đậm */
 }
 
 /* Sort */
@@ -398,10 +386,10 @@ a:hover {
   align-items: center;
 }
 [sort="sort"] .d-flex {
-  background-color: #f8f9fa;
+  background-color: #ffffff; /* Trắng tinh */
   border-radius: 5px;
   padding: 10px;
-  border: 1px solid #dee2e6;
+  border: 1px solid #e6f3f3;
 }
 [sort="sort"] .div {
   text-align: center;
@@ -412,7 +400,7 @@ a:hover {
 
 [sort="sort"] i {
   padding: 5px;
-  color: #0056b3;
+  color: #003366; /* Xanh dương đậm */
   font-size: larger;
 }
 
@@ -422,43 +410,43 @@ a:hover {
   min-width: 200px;
   background-color: #fff;
   color: #212529;
-  border: 1px solid #dee2e6;
+  border: 1px solid #e6f3f3;
   border-radius: 4px;
 }
 [sort="sort"] .form-control:focus {
-  border-color: #80bdff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: #336699; /* Xanh dương sáng */
+  box-shadow: 0 0 0 0.2rem rgba(51, 102, 153, 0.25);
 }
 
 [sort="sort"] .btn-danger {
   font-size: 1rem;
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  border-color: #003366;
   padding: 8px 16px;
   white-space: nowrap;
   border-radius: 4px;
-  transition: background-color 0.3s, border-color 0.3s;
 }
+
 [sort="sort"] .btn-danger:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
+  background: #fff;
+  color: #003366
 }
 
 /* Product-item */
 .product-item {
-  border: 1px solid #dee2e6;
+  border: 1px solid #cccccc; /* Xám nhạt */
   border-radius: 8px;
   overflow: hidden;
   transition: box-shadow 0.3s;
   height: 380px;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  background-color: #ffffff;
 }
 
 .product-item:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 51, 102, 0.2); /* Bóng xanh dương nhẹ */
 }
 
 .product-item .inner-image {
@@ -467,16 +455,16 @@ a:hover {
   justify-content: center;
   width: 100%;
   aspect-ratio: 4/3;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid #cccccc; /* Xám nhạt */
   position: relative;
-  background-color: #f8f9fa;
+  background-color: #f9f9f9;
 }
 
 .product-item .inner-featured {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: #007bff;
+  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
   color: #fff;
   padding: 3px 8px;
   font-weight: 600;
@@ -520,13 +508,13 @@ a:hover {
 }
 
 .product-item .inner-content .inner-title a:hover {
-  color: #0056b3;
+  color: #003366; /* Xanh dương đậm */
 }
 
 .product-item .inner-content .inner-price-new {
   font-size: 16px;
   font-weight: 700;
-  color: #0056b3;
+  color: 	#4f925a; /* Xanh dương đậm */
 }
 
 .product-item .inner-content .inner-price-old {
@@ -540,14 +528,14 @@ a:hover {
 .product-item .inner-content .btn-outline-success {
   font-size: 14px;
   padding: 6px 12px;
-  color: #0056b3;
-  border-color: #0056b3;
+  color: #003366; /* Xanh dương đậm */
+  border-color: #003366;
   background-color: transparent;
   border-radius: 4px;
   transition: all 0.3s ease;
 }
 .product-item .inner-content .btn-outline-success:hover {
-  background-color: #0056b3;
+  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
   color: #fff;
 }
 
@@ -565,16 +553,16 @@ a:hover {
 
 /* Product-detail */
 .product-detail .btn-secondary {
-  color: #0056b3;
-  background-color: #f8f9fa;
-  border-color: #dee2e6;
+  color: #003366; /* Xanh dương đậm */
+  background-color: #f9f9f9;
+  border-color: #e6f3f3;
   transition: all 0.3s ease;
 }
 
 .product-detail .btn-secondary:hover {
   color: #fff;
-  background-color: #0056b3;
-  border-color: #0056b3;
+  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  border-color: #003366;
 }
 
 .product-detail .row .col-7 {
@@ -586,7 +574,7 @@ a:hover {
 .product-detail .inner-thumb img {
   width: 100%;
   height: auto;
-  border: 1px solid #dee2e6;
+  border: 1px solid #e6f3f3;
   border-radius: 8px;
 }
 
@@ -602,11 +590,11 @@ a:hover {
   font-size: 14px;
 }
 .product-detail .inner-category a {
-  color: #0056b3;
+  color: #003366; /* Xanh dương đậm */
 }
 
 .product-detail .inner-price-new {
-  color: #0056b3;
+  color: 	#4f925a; /* Xanh dương đậm */
   font-weight: 700;
   font-size: 28px;
   margin-bottom: 5px;
@@ -639,8 +627,7 @@ a:hover {
 
 .product-detail .inner-stock span {
   color: #fff;
-  background: #28a745;
-  /* background: #007bff; */
+  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
   font-weight: 600;
   padding: 4px 8px;
   border-radius: 4px;
@@ -654,39 +641,39 @@ a:hover {
 }
 
 .pagination .page-link {
-  color: #0056b3;
+  color: #003366; /* Xanh dương đậm */
   border-radius: 4px;
   margin: 0 3px;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-  border: 1px solid #dee2e6;
+  border: 1px solid #e6f3f3;
 }
 
 .pagination .page-item.active .page-link {
-  background-color: #0056b3;
+  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
   color: #fff;
-  border-color: #0056b3;
+  border-color: #003366;
 }
 
 .pagination .page-link:hover {
-  background-color: #f8f9fa;
-  color: #004085;
-  border-color: #dee2e6;
+  background-color: #e6f3f3;
+  color: #002244;
+  border-color: #cccccc; /* Màu viền đậm hơn background */
 }
 .pagination .page-item.disabled .page-link {
   color: #6c757d;
   background-color: #fff;
-  border-color: #dee2e6;
+  border-color: #e6f3f3;
 }
 
 /* Cart */
 .cart {
-  border: 1px solid #dee2e6;
+  border: 1px solid #e6f3f3;
 }
 
 .cart thead tr th {
   color: #212529;
-  background-color: #f8f9fa;
-  border-bottom: 2px solid #dee2e6;
+  background-color: #f9f9f9;
+  border-bottom: 2px solid #e6f3f3;
 }
 
 .cart tbody tr td {
@@ -698,15 +685,15 @@ a:hover {
   color: #212529;
 }
 .cart tbody tr td .product-info a {
-  color: #0056b3;
+  color: #003366; /* Xanh dương đậm */
 }
 
 .cart tbody tr td a:hover {
-  color: #004085;
+  color: #002244; /* Xanh dương đậm hơn */
 }
 .cart-total {
   font-weight: bold;
-  color: #0056b3;
+  color: #003366; /* Xanh dương đậm */
   margin: 0;
   padding: 5px;
 }
@@ -724,7 +711,7 @@ a:hover {
   align-items: center;
   gap: 5px;
   font-size: 1rem;
-  color: #0056b3;
+  color: #003366;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -768,15 +755,15 @@ a:hover {
   display: inline-block;
   font-size: 1rem;
   font-weight: bold;
-  color: #0056b3;
+  color: #003366; /* Xanh dương đậm */
 }
 
 /* Footer */
 footer {
-  background: #f8f9fa;
+  background: #f9f9f9;
   color: #6c757d;
   padding: 40px 0;
-  border-top: 3px solid #0056b3;
+  border-top: 3px solid #003366; /* Xanh dương đậm */
 }
 
 footer .container {
@@ -802,13 +789,13 @@ footer .logo {
   text-decoration: none;
   font-size: 24px;
   font-weight: bold;
-  color: #0056b3;
+  color: #003366; /* Xanh dương đậm */
   margin-bottom: 15px;
 }
 
 footer .logo i {
   margin-right: 8px;
-  color: #0056b3;
+  color: #003366; /* Xanh dương đậm */
 }
 
 /* Footer info text */
@@ -841,7 +828,7 @@ footer .box a {
 }
 
 footer .box a:hover {
-  color: #0056b3;
+  color: #003366; /* Xanh dương đậm */
 }
 
 footer .box-logo {
@@ -858,7 +845,7 @@ footer .box-logo a {
 }
 
 footer .box-logo a:hover {
-  color: #0056b3;
+  color: #003366; /* Xanh dương đậm */
 }
 
 /* Show Alert */
@@ -920,17 +907,17 @@ footer .box-logo a:hover {
 .product-categories {
   list-style: none;
   background-color: #ffffff;
-  border: 1px solid #dee2e6;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e6f3f3;
+  box-shadow: 0 2px 4px rgba(0, 51, 102, 0.05); /* Bóng xanh dương nhẹ */
   overflow: hidden;
   border-radius: 8px;
 }
 .product-categories .box-head .inner-title {
   color: #ffffff;
   padding: 12px 15px;
-  background-color: #0056b3;
+  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
   font-size: 18px;
-  border-bottom: 1px solid #004085;
+  border-bottom: 1px solid #002244; /* Xanh dương đậm hơn */
 }
 .product-categories .box-head .inner-title i {
   margin-right: 10px;
@@ -961,8 +948,8 @@ footer .box-logo a:hover {
 
 .product-categories li:hover a,
 .product-categories li.active a {
-  color: #0056b3;
-  background-color: #e9ecef;
+  color: #003366; /* Xanh dương đậm */
+  background-color: #e6f3f3;
 }
 
 /* User page */
@@ -972,24 +959,24 @@ footer .box-logo a:hover {
 }
 
 .btn-outline-primary {
-  color: #0056b3;
+  color: #003366; /* Xanh dương đậm */
   background-color: transparent;
-  border: 1px solid #0056b3;
+  border: 1px solid #003366;
   transition: all 0.3s ease;
 }
 .btn-outline-primary:hover {
   color: #ffffff;
-  background-color: #0056b3;
-  border-color: #0056b3;
+  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  border-color: #003366;
 }
 
 #user-page .user-info {
-  background-color: #f8f9fa;
+  background-color: #f9f9f9;
   margin-bottom: 20px;
   border-radius: 8px;
   color: #212529;
   font-weight: normal;
-  border: 1px solid #dee2e6;
+  border: 1px solid #e6f3f3;
   padding: 20px;
 }
 
@@ -1011,14 +998,14 @@ footer .box-logo a:hover {
   margin: 50px auto;
   padding: 30px;
   background-color: #fff;
-  border: 1px solid #dee2e6;
+  border: 1px solid #e6f3f3;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 10px rgba(0, 51, 102, 0.05); /* Bóng xanh dương nhẹ */
 }
 
 #loginPage h1 {
   font-weight: bold;
-  color: #0056b3;
+  color: #003366; /* Xanh dương đậm */
   text-align: center;
   margin-bottom: 25px;
 }
@@ -1029,31 +1016,30 @@ footer .box-logo a:hover {
 }
 
 #loginPage .form-control {
-  border: 1px solid #dee2e6;
+  border: 1px solid #e6f3f3;
   padding: 10px 12px;
   border-radius: 4px;
 }
 #loginPage .form-control:focus {
-  border-color: #80bdff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: #336699; /* Xanh dương sáng */
+  box-shadow: 0 0 0 0.2rem rgba(51, 102, 153, 0.25);
 }
 
 #loginPage .btn {
   margin-top: 20px;
   color: #fff;
-  background-color: #0056b3;
-  border: 1px solid #0056b3;
+  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  border: 1px solid #003366;
   padding: 10px 15px;
   width: 100%;
   font-size: 16px;
   font-weight: bold;
-  transition: background-color 0.3s, border-color 0.3s;
+  transition: background 0.3s, border-color 0.3s;
 }
 
 #loginPage .btn:hover {
-  color: #fff;
-  background-color: #004085;
-  border-color: #004085;
+  background: #002244;
+  border-color: #003366;
 }
 
 #loginPage .d-flex {
@@ -1061,15 +1047,13 @@ footer .box-logo a:hover {
   margin-top: 15px;
 }
 #loginPage .d-flex a {
-  color: #0056b3;
+  color: #003366; /* Xanh dương đậm */
   font-size: 14px;
 }
 #loginPage .d-flex a:hover {
   text-decoration: underline;
-  color: #004085;
+  color: #002244; /* Xanh dương đậm hơn */
 }
-
-
 
 /* Circle button */
 .circular-button {
@@ -1079,12 +1063,12 @@ footer .box-logo a:hover {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #0056b3;
+  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 5px rgba(0, 51, 102, 0.2); /* Bóng xanh dương nhẹ */
   border: none;
   padding: 0;
   z-index: 1000;
@@ -1102,22 +1086,22 @@ footer .box-logo a:hover {
 /* Chat panel */
 .chat-panel {
   position: fixed;
-  bottom: 80px; /* Điều chỉnh để không đè lên nút circular-button */
+  bottom: 80px;
   right: 20px;
   width: 300px;
   height: 400px;
   background: #fff;
   border-radius: 5px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 51, 102, 0.1); /* Bóng xanh dương nhẹ */
   z-index: 1000;
-  overflow: hidden; /* Đảm bảo nội dung không tràn ra ngoài */
+  overflow: hidden;
 }
 
 /* Nội dung chat trong panel */
 .chat-panel .chat {
   background-color: #fff;
   width: 100%;
-  height: 100%; /* Chiếm toàn bộ chiều cao của panel */
+  height: 100%;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -1130,9 +1114,9 @@ footer .box-logo a:hover {
 
 .chat-panel .chat .inner-body {
   padding: 20px;
-  max-height: 300px; /* Giới hạn chiều cao để dành chỗ cho header và footer */
+  max-height: 300px;
   overflow-y: auto;
-  background-color: #f8f9fa;
+  background-color: #f9f9f9;
 }
 
 .chat-panel .chat .inner-incoming {
@@ -1148,7 +1132,7 @@ footer .box-logo a:hover {
 }
 
 .chat-panel .chat .inner-incoming .inner-content {
-  background-color: #e9ecef;
+  background-color: #e6f3f3;
   color: #212529;
   padding: 8px 12px;
   border-radius: 15px 15px 15px 0;
@@ -1166,7 +1150,7 @@ footer .box-logo a:hover {
 }
 
 .chat-panel .chat .inner-outgoing .inner-content {
-  background-color: #007bff;
+  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
   color: #fff;
   padding: 8px 5px;
   border-radius: 15px 15px 0 15px;
@@ -1176,7 +1160,6 @@ footer .box-logo a:hover {
   font-size: 14px;
 }
 
-
 .inner-outgoing small {
   font-size: 0.75rem;
   color: #000;
@@ -1185,7 +1168,7 @@ footer .box-logo a:hover {
 
 .chat-panel .chat .inner-foot {
   padding: 10px 20px;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid #e6f3f3;
   background-color: #fff;
   position: absolute;
   bottom: 0;
@@ -1201,19 +1184,19 @@ footer .box-logo a:hover {
 .chat-panel .chat .inner-form input {
   flex: 1;
   padding: 8px 12px;
-  border: 1px solid #dee2e6;
+  border: 1px solid #e6f3f3;
   border-radius: 20px;
   outline: none;
   font-size: 14px;
 }
 
 .chat-panel .chat .inner-form input:focus {
-  border-color: #80bdff;
+  border-color: #336699; /* Xanh dương sáng */
 }
 
 .chat-panel .chat .inner-form button {
-  background: #0056b3;
-  border: 1px solid #0056b3;
+  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  border: 1px solid #003366;
   border-radius: 50%;
   width: 36px;
   height: 36px;
@@ -1223,11 +1206,11 @@ footer .box-logo a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.3s;
+  transition: background 0.3s;
 }
 
 .chat-panel .chat .inner-form button:hover {
-  background-color: #004085;
+  background: #002244; /* Xanh dương đậm hơn */
 }
 
 .chat-panel .chat .inner-form button i {
@@ -1237,7 +1220,7 @@ footer .box-logo a:hover {
 
 .chat-panel .user-disconnected,
 .chat-panel .user-reconnected {
-  font-weight: bold;
+  font-weight: normal;
   text-align: center;
   margin: 10px 0;
   font-size: 12px;
@@ -1255,13 +1238,13 @@ footer .box-logo a:hover {
   background-color: #d4edda;
 }
 
-/* Header của chat (nếu cần thêm kiểu dáng cho inner-name) */
+/* Header của chat */
 .chat-panel .inner-head {
   margin: 0;
   padding: 10px;
   font-weight: bold;
-  color: #004085;
-  background-color: #80bdff;
+  color: #ffffff;
+  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
 }
 
 .chat-panel .inner-head span {
@@ -1273,5 +1256,5 @@ footer .box-logo a:hover {
   cursor: pointer;
   padding: 5px 10px;
   text-align: right;
-  color: #004085;
+  color: #ffffff;
 }

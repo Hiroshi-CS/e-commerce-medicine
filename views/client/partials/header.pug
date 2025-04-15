@@ -8,7 +8,7 @@ header.header
           a.logo(href="/")
             i.ri-home-heart-line
               |  Medicine
-      .col-4 
+      .col-5 
         .search-box
           form.search(
             action="search"
@@ -22,45 +22,47 @@ header.header
               name="keyword"
               value=keyword)
             button(type="submit") Search
-      .col-3 
+      .col-5 
         .inner-menu 
           ul.second-links.flexitem 
             li 
               a(href="/") Trang chủ
-            li.dropdown
-              a#productDropdownMenuLink.dropdown-toggle(
-                href="/products"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              )
-                | Sản phẩm
-              ul.dropdown-menu.mega-menu(aria-labelledby="productDropdownMenuLink")
-                li
-                  .container-fluid.px-4.py-3
-                    .row.g-3 
-                      .col-lg-7.col-md-6
-                        .all-categories-list
-                          if layoutProductCategory && layoutProductCategory.length > 0
-                            each categoryL1 in layoutProductCategory
-                              .category-group.mb-3 
-                                h6.mega-menu-title
-                                  a(href=`/products/${categoryL1.slug}`) #{categoryL1.title}
-                                if categoryL1.children && categoryL1.children.length > 0
-                                  ul.list-unstyled.mega-menu-list
-                                    each categoryL2 in categoryL1.children
-                                      li
-                                        a(href=`/products/${categoryL2.slug}`) #{categoryL2.title}
-                          else
-                            p.text-muted Không có danh mục nào.
-
-      .col-3
-        .inner-tools
-          ul.second-links.flexitem 
+            li
+              .d-flex.align-items-center
+                a(href="/products") 
+                  | Sản phẩm 
+                .dropdown
+                  a#productDropdownMenuLink.dropdown-toggle(
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  )                
+                  ul.dropdown-menu.mega-menu(aria-labelledby="productDropdownMenuLink")
+                    li
+                      .container-fluid.px-4.py-3
+                        .row.g-3 
+                          .col-lg-7.col-md-6
+                            .all-categories-list
+                              if layoutProductCategory && layoutProductCategory.length > 0
+                                each categoryL1 in layoutProductCategory
+                                  .category-group.mb-3 
+                                    h6.mega-menu-title
+                                      a(href=`/products/${categoryL1.slug}`) #{categoryL1.title}
+                                    if categoryL1.children && categoryL1.children.length > 0
+                                      ul.list-unstyled.mega-menu-list
+                                        each categoryL2 in categoryL1.children
+                                          li
+                                            a(href=`/products/${categoryL2.slug}`) #{categoryL2.title}
+                              else
+                                p.text-muted Không có danh mục nào.
             li 
               a(href="/cart") Giỏ hàng
                 i.fas.fa-shopping-cart 
                 | (#{miniCart ? miniCart.totalQuantity : "0"})
+            li 
+              a(href="#") 
+                | Blog
       .col-1
         .inner-avatar 
           ul.second-links.flexitem 

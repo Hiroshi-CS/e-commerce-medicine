@@ -8,9 +8,16 @@ module.exports.index =  async (req, res) => {
     .sort({ updateAt: -1 });
   
     for (let i = 0; i < conversations.length; i++) {
-      const user = await User.findById(conversations[i].user_id);
-      conversations[i].userName = user.fullName;
-      conversations[i].userAvatar = user.avatar;
+      let userId = conversations[i].user_id;
+      const isGuestUser = userId.split("_")[0];
+      if(isGuestUser != "guest"){
+        const user = await User.findById(userId);
+        conversations[i].userName = user.fullName;
+        conversations[i].userAvatar = user.avatar;
+      } else {
+        conversations[i].userName = userId;
+        conversations[i].userAvatar = null;
+      }
     }
     res.render("admin/pages/chat/index", {
       pageTitle: "Quản lý hội thoại",
@@ -19,18 +26,25 @@ module.exports.index =  async (req, res) => {
   };
 // [GET]  /chat/:conversationId
 module.exports.getChat = async (req, res) => {
-  
   const conversation = await Conversation.findById(req.params.conversationId);
-  const user = await User.findOne({
-    _id: conversation.user_id,
-  });
+  let userId = conversation.user_id;
+  const isGuestUser = userId.split("_")[0];
+  let userName;
+  if(isGuestUser != "guest"){
+    const user = await User.findOne({
+      _id: conversation.user_id,
+    });
+    userName = user.fullName;
+  } else {
+    userName = "Guest"
+  }
   const admin = await User.findOne({ 
     _id: conversation.admin_id, 
   });
   res.render(`admin/pages/chat/detail`, { 
     pageTitle: "Chi tiết hội thoại",
     conversation: conversation, 
-    user: user, 
+    userName: userName, 
     admin: admin, 
     messages: conversation.messages
   });
