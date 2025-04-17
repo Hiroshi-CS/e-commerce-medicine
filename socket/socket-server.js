@@ -23,8 +23,6 @@ function initSocketServer(httpServer) {
         socket.sessionID = sessionID;
         socket.userId = session.userId;
         socket.userName = session.username;
-        socket.userId = session.userId;
-        socket.userName = session.username;
         socket.role = session.role;
         socket.connected = true;
 
@@ -40,7 +38,6 @@ function initSocketServer(httpServer) {
     if (!userName) {
       return next(new Error("invalid username"));
     }
-
 
     socket.sessionID = generate.generateRandomString(20);
     socket.userId = socket.handshake.auth.userId || `guest_${socket.sessionID}`;
@@ -65,9 +62,8 @@ function initSocketServer(httpServer) {
 
     return next();
   });
-  
-  io.on("connection", (socket) => {
 
+  io.on("connection", (socket) => {
     socket.join(socket.userId);
 
     socket.emit("session", {
@@ -88,45 +84,33 @@ function initSocketServer(httpServer) {
 
     // Get messages history (client - page)
     socket.on("getMessages", async (userId) => {
-        const roleAdmin = await Role.findOne({
-          title: "admin",
+      const roleAdmin = await Role.findOne({
+        title: "admin",
+      });
+
+      const adminId = await User.findOne({
+        role_id: roleAdmin.id,
+      });
+      // Tim kiem cuoc hoi thoai theo userId da luu trong socket
+      let conversation = await Conversation.findOne({
+        user_id: socket.userId,
+      });
+      //Nếu chưa có hội thoại
+      if (!conversation) {
+        conversation = new Conversation({
+          user_id: socket.userId,
+          admin_id: adminId.id,
+          lastMessage: "",
+          updateAt: new Date(),
+          messages: [],
         });
-  
-        const adminId = await User.findOne({
-          role_id: roleAdmin.id,
-        });
-        let conversation;
-        // Kiểm tra userId có tồn tại 
-        if (userId) {
-          conversation = await Conversation.findOne({
-            user_id: userId,
-          });
-          //Nếu chưa có hội thoại
-          if (!conversation) {
-            conversation = new Conversation({
-              user_id: userId,
-              admin_id: adminId.id,
-              lastMessage: "",
-              updateAt: new Date(),
-              messages: [],
-            });
-          }
-        } else { // Không tồn tại userId
-          conversation = new Conversation({
-            user_id: socket.userId,
-            admin_id: adminId.id,
-            lastMessage: "",
-            updateAt: new Date(),
-            messages: [],
-          });
-        }
         await conversation.save();
-        (socket.conversationId = conversation.id),
-          // Join room private
-          socket.join(conversation.id);
-        // Load old message
-        socket.emit("loadMessages", conversation.messages);
-   
+      }
+      (socket.conversationId = conversation._id),
+        // Join room private
+        socket.join(conversation._id);
+      // Load old message
+      socket.emit("loadMessages", conversation.messages);
     });
 
     // Handle private message
@@ -154,9 +138,7 @@ function initSocketServer(httpServer) {
     });
 
     // Handle disconnect
-    // Handle disconnect
     socket.on("disconnect", async () => {
-      
       const matchingSockets = await io.in(socket.userId).fetchSockets();
       const isStillConnected = matchingSockets.length == 0;
       if (isStillConnected) {
@@ -189,4 +171,3 @@ function initSocketServer(httpServer) {
 }
 
 module.exports = initSocketServer;
-
