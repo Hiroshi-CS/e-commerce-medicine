@@ -51,7 +51,7 @@ header.header
                                     h6.mega-menu-title
                                       a(href=`/products/${categoryL1.slug}`) #{categoryL1.title}
                                     if categoryL1.children && categoryL1.children.length > 0
-                                      ul.list-unstyled.mega-menu-list
+                                      ul.list-unstyled.mega-menu-list 
                                         each categoryL2 in categoryL1.children
                                           li
                                             a(href=`/products/${categoryL2.slug}`) #{categoryL2.title}
