@@ -202,19 +202,20 @@ a:hover {
   box-shadow: 0 2px 5px rgba(0, 51, 102, 0.1); /* Bóng xanh dương nhẹ */
 }
 
+/* Mega Menu */
 .mega-menu.dropdown-menu {
   width: 85vw;
   max-width: 1140px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 0;
+  padding: 20px;
   display: none;
   position: absolute;
-  background-color: #ffffff; /* Trắng tinh */
-  border: 1px solid #cccccc; /* Xám nhạt */
-  box-shadow: 0 0.5rem 1rem rgba(0, 51, 102, 0.15); /* Bóng xanh dương */
-  margin-top: 0.125rem;
-  border-radius: 0.375rem;
+  background-color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 16px rgba(0, 51, 102, 0.2); /* Bóng xanh dương đậm hơn */
+  margin-top: 0;
+  border-radius: 8px;
   z-index: 1021;
 }
 
@@ -225,47 +226,184 @@ a:hover {
 .mega-menu .row {
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
+}
+
+.mega-menu .col-lg-7.col-md-6 {
+  display: flex;
+  flex-direction: column;
+}
+
+.mega-menu .category-group {
+  margin-bottom: 20px;
 }
 
 .mega-menu .mega-menu-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #212529;
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid #e6f3f3;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #003366; /* Xanh dương đậm */
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #e6f3f3; /* Viền xanh nhạt */
+  transition: color 0.3s ease;
 }
 
 .mega-menu .mega-menu-title a {
   color: inherit;
   text-decoration: none;
 }
+
 .mega-menu .mega-menu-title a:hover {
-  color: #003366; /* Xanh dương đậm */
-  text-decoration: underline;
+  color: #002244; /* Xanh dương đậm hơn */
 }
 
 .mega-menu .mega-menu-list {
-  padding-left: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .mega-menu .mega-menu-list li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
 }
 
 .mega-menu .mega-menu-list li a {
-  color: #6c757d;
-  text-decoration: none;
-  font-size: 0.9rem;
+  color: #6c757d; /* Xám trung tính */
+  font-size: 0.95rem;
   display: block;
-  padding: 2px 0;
-  transition: color 0.2s ease-in-out;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
 .mega-menu .mega-menu-list li a:hover {
   color: #003366; /* Xanh dương đậm */
-  background-color: #e6f3f3;
+  background-color: #f8f9fa; /* Nền xám nhạt khi hover */
+  transform: translateX(5px); /* Dịch nhẹ sang phải */
 }
+
+/* Mega Menu Right Section */
+.mega-menu-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mega-menu-right .mega-menu-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #003366; /* Xanh dương đậm */
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #e6f3f3; /* Viền xanh nhạt */
+}
+
+/* Carousel */
+.mega-menu-right .carousel {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 51, 102, 0.15); /* Bóng xanh dương nhẹ */
+}
+
+.mega-menu-right .carousel-inner {
+  background: #f8f9fa; /* Nền xám nhạt */
+}
+
+.mega-menu-right .carousel-item {
+  position: relative;
+  transition: transform 0.5s ease-in-out;
+}
+
+.mega-menu-right .carousel-item img {
+  width: 100%;
+  height: 200px; /* Chiều cao cố định cho desktop */
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+
+.mega-menu-right .carousel-item:hover {
+  transform: scale(1.02); /* Phóng to nhẹ khi hover */
+}
+
+/* Overlay cho slide */
+.mega-menu-right .carousel-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 51, 102, 0.5); /* Lớp phủ xanh dương mờ */
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.mega-menu-right .carousel-item:hover::after {
+  background: rgba(0, 51, 102, 0.6); /* Tăng độ mờ khi hover */
+}
+
+/* Text trên slide */
+.mega-menu-right .carousel-item .carousel-caption {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  color: #fff;
+  text-align: left;
+  padding: 10px;
+  background: rgba(0, 51, 102, 0.7); /* Nền xanh dương mờ cho text */
+  border-radius: 4px;
+}
+
+.mega-menu-right .carousel-item .carousel-caption h5 {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.mega-menu-right .carousel-item .carousel-caption p {
+  font-size: 0.85rem;
+  margin-bottom: 0;
+}
+
+/* Carousel Controls */
+.mega-menu-right .carousel-control-prev,
+.mega-menu-right .carousel-control-next {
+  width: 30px;
+  background: rgba(0, 51, 102, 0.5); /* Nền xanh dương mờ */
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0; /* Ẩn mặc định */
+  transition: opacity 0.3s ease;
+}
+
+.mega-menu-right .carousel:hover .carousel-control-prev,
+.mega-menu-right .carousel:hover .carousel-control-next {
+  opacity: 0.7; /* Hiện khi hover */
+}
+
+.mega-menu-right .carousel-control-prev:hover,
+.mega-menu-right .carousel-control-next:hover {
+  opacity: 1;
+}
+
+.mega-menu-right .carousel-control-prev-icon,
+.mega-menu-right .carousel-control-next-icon {
+  background-size: 100%, 100%;
+  width: 20px;
+  height: 20px;
+}
+
+.mega-menu-right .carousel-control-prev {
+  left: -15px;
+}
+
+.mega-menu-right .carousel-control-next {
+  right: -15px;
+}
+
 
 .inner-tools ul {
   list-style: none;
@@ -499,8 +637,11 @@ a:hover {
   color: #212529;
   text-decoration: none;
   display: -webkit-box;
+  display: box; /* Thêm chuẩn */
   -webkit-line-clamp: 2;
+  line-clamp: 2; /* Thêm chuẩn */
   -webkit-box-orient: vertical;
+  box-orient: vertical; /* Thêm chuẩn */
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.4em;
@@ -758,68 +899,65 @@ a:hover {
   color: #003366; /* Xanh dương đậm */
 }
 
-/* Footer */
 footer {
-  background: #f9f9f9;
-  color: #6c757d;
+  background: linear-gradient(to right, #003366, #336699);
+  color: #fff;
   padding: 40px 0;
-  border-top: 3px solid #003366; /* Xanh dương đậm */
+  border-top: 3px solid #003366;
 }
 
-footer .container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 30px;
-}
-
-/* Logo container footer */
 footer .logo-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  flex-basis: 25%;
-  min-width: 200px;
 }
 
-/* Logo footer */
 footer .logo {
   display: flex;
   align-items: center;
   text-decoration: none;
   font-size: 24px;
   font-weight: bold;
-  color: #003366; /* Xanh dương đậm */
+  color: #fff;
   margin-bottom: 15px;
 }
 
 footer .logo i {
   margin-right: 8px;
-  color: #003366; /* Xanh dương đậm */
+  color: #fff;
 }
 
-/* Footer info text */
-footer .logo-container p {
-  color: #6c757d;
-  font-size: 14px;
-  line-height: 1.6;
+footer .box-logo h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+footer .social-icons a {
+  font-size: 20px;
+  color: #fff;
+  margin-right: 15px;
+  transition: color 0.3s;
+}
+
+footer .social-icons a:hover {
+  color: #4a90e2;
 }
 
 footer .box {
   flex: 1;
   min-width: 180px;
-  margin-left: 0;
 }
 
 footer .box h3 {
   font-size: 18px;
   margin-bottom: 20px;
-  color: #212529;
+  color: #fff;
   font-weight: 600;
 }
 
 footer .box a {
-  color: #6c757d;
+  color: #fff;
   text-decoration: none;
   display: block;
   margin-bottom: 10px;
@@ -828,24 +966,7 @@ footer .box a {
 }
 
 footer .box a:hover {
-  color: #003366; /* Xanh dương đậm */
-}
-
-footer .box-logo {
-  display: flex;
-  gap: 15px;
-  margin-top: 15px;
-}
-
-footer .box-logo a {
-  font-size: 20px;
-  color: #6c757d;
-  transition: color 0.3s;
-  margin-right: 0;
-}
-
-footer .box-logo a:hover {
-  color: #003366; /* Xanh dương đậm */
+  color: #4a90e2;
 }
 
 /* Show Alert */
@@ -1147,7 +1268,7 @@ footer .box-logo a:hover {
   flex-direction: column;
   align-items: flex-end;
   margin-bottom: 15px;
-}
+} 
 
 .chat-panel .chat .inner-outgoing .inner-content {
   background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */

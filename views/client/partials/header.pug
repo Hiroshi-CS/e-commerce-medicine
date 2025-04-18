@@ -1,4 +1,5 @@
 include ../mixins/sub-menu.pug
+include ../mixins/carousel.pug
 
 header.header
   .container 
@@ -38,7 +39,7 @@ header.header
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   )                
-                  ul.dropdown-menu.mega-menu(aria-labelledby="productDropdownMenuLink")
+                  ul.dropdown-menu.mega-menu(aria-labelledby="productDropdownMenuLink").mt-3
                     li
                       .container-fluid.px-4.py-3
                         .row.g-3 
@@ -54,8 +55,10 @@ header.header
                                         each categoryL2 in categoryL1.children
                                           li
                                             a(href=`/products/${categoryL2.slug}`) #{categoryL2.title}
-                              else
-                                p.text-muted Không có danh mục nào.
+                          .col-lg-4.col-md-6
+                            .mega-menu-right
+                              h6.mega-menu-title Quảng cáo nổi bật
+                              +carousel()
             li 
               a(href="/cart") Giỏ hàng
                 i.fas.fa-shopping-cart 

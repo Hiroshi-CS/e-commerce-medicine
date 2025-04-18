@@ -517,7 +517,7 @@ header .btn-primary:hover {
   color: #bdc3c7;
   margin-bottom: 3px;
 }
-
+ 
 .chat .inner-incoming .inner-content {
   background-color: #4a6076;
   color: #ffffff;
@@ -619,13 +619,15 @@ header .btn-primary:hover {
 /* Chat Card */
 .chat-card {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  height: 200px;
   padding: 15px;
   margin-bottom: 15px;
   background: linear-gradient(to right, #34495e, #2c3e50);
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
 }
 
 .chat-card:hover {
@@ -637,13 +639,13 @@ header .btn-primary:hover {
   display: flex;
   align-items: center;
   width: 100%;
+  margin: 0 0 5px 10px;
 }
 
 .chat-card .avatar {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  margin-right: 15px;
   border: 2px solid #5dade2;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
@@ -656,11 +658,16 @@ header .btn-primary:hover {
   margin: 0;
   font-size: 18px;
   color: #ffffff;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .chat-card .chat-meta p {
   margin: 5px 0 0;
   font-size: 14px;
   color: #bdc3c7;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: none;
 }
 /* End Chat Card */

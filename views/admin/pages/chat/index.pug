@@ -6,14 +6,19 @@ block main
     .row 
       .col-12
         +box-head(pageTitle) 
-
-  .chat-card
-    each conversation in conversations
-      a(href=`/admin/conversations/${conversation._id}` class="chat-card")
-        .chat-info
-          img.avatar(
-            src=conversation.userAvatar || "/uploads/avatar-default.jpg" 
-            alt="Avatar")
-          .chat-meta
-            h3= conversation.userName
-            p Cập nhật gần nhất: #{new Date(conversation.updateAt).toLocaleString()}
+    .row
+      each conversation in conversations
+        .col-4.mb-3
+          .chat-card
+            a(href=`/admin/conversations/${conversation._id}` class="chat-card")
+              .chat-info
+                img.avatar(
+                  src=conversation.userAvatar || "/uploads/avatar-default.jpg" 
+                  alt="Avatar")
+              .chat-meta
+                h3= conversation.userName
+                if(conversation.lastMessage) 
+                  p Last message: #{conversation.lastMessage}
+                  p Updated at: #{new Date(conversation.updateAt).toLocaleString()}
+                else
+                  p (Chưa có cuộc trò chuyện nào)

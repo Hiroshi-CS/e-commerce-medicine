@@ -75,11 +75,11 @@ function initSocketServer(httpServer) {
     });
 
     // Join room private (admin page)
-    socket.on("joinRoom", async (conversationId, userId, userName) => {
+    socket.on("joinRoom", async (conversationId) => {
       socket.join(conversationId);
       socket.conversationId = conversationId;
-      socket.userId = userId || socket.userId;
-      socket.userName = userName || socket.userName;
+      socket.userId = socket.userId;
+      socket.userName = socket.userName;
     });
 
     // Get messages history (client - page)
@@ -106,9 +106,9 @@ function initSocketServer(httpServer) {
         });
         await conversation.save();
       }
-      (socket.conversationId = conversation._id),
+      (socket.conversationId = conversation.id),
         // Join room private
-        socket.join(conversation._id);
+        socket.join(conversation.id);
       // Load old message
       socket.emit("loadMessages", conversation.messages);
     });
@@ -133,8 +133,7 @@ function initSocketServer(httpServer) {
       conversation.lastMessage = content;
       conversation.updateAt = new Date();
       await conversation.save();
-
-      io.to(socket.conversationId).emit("newMessage", newMessage);
+      io.to(conversation.id).emit("newMessage", newMessage);
     });
 
     // Handle disconnect

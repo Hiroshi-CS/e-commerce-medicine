@@ -23,18 +23,17 @@ if (chat && form && input && messages) {
     if (!userInfo.fullName) userInfo.fullName = sessionData.userName;
   });
   socket.on("connect", () => {
-    socket.emit("joinRoom", conversationId, userInfo._id, userInfo.fullName);
+    socket.emit("joinRoom", conversationId);
   });
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const msg = input.value.trim();
-    if (msg) {
-      const content = {
-        msg,
+    const content = messageInput.value.trim();
+    if (content) {
+      socket.emit("private message", {
+        msg: content,
         createdAt: new Date(),
-      };
-      socket.emit("private message", content);
+      });
       input.value = "";
     }
   });
