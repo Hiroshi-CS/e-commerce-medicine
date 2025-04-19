@@ -8,7 +8,6 @@ block main
       +alert-success(5000)
       +alert-error(5000)
       .row.justify-content-center
-        .col-12
           h1(class="text-center") Đăng nhập 
           form(
             action="/user/login"
@@ -39,4 +38,5 @@ block main
               ) Đăng nhập
             div.d-flex.justify-content-between
               a(href="/user/password/forgot") Quên mật khẩu
-              a(href="/user/register") Đăng ký
+              span Chưa có tài khoản? 
+                a(href="/user/register") Đăng ký

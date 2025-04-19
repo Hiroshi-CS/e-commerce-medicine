@@ -1,6 +1,6 @@
 /* Reset default styles */
 :root {
-  --font-geist-sans: 'Geist', sans-serif;
+  --font-geist-sans: "Geist", sans-serif;
 }
 
 * {
@@ -50,7 +50,11 @@ a:hover {
 
 /* Top Header */
 .top-header {
-  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  background: linear-gradient(
+    to right,
+    #003366,
+    #336699
+  ); /* Gradient xanh dương đậm */
   padding: 5px 0;
   border-bottom: 1px solid #e6f3f3;
 }
@@ -73,7 +77,11 @@ a:hover {
 
 /* Header */
 .header {
-  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  background: linear-gradient(
+    to right,
+    #003366,
+    #336699
+  ); /* Gradient xanh dương đậm */
   border-bottom: 1px solid #e6f3f3;
   padding: 10px 0;
   box-shadow: 0 2px 4px rgba(0, 51, 102, 0.2); /* Bóng xanh dương nhẹ */
@@ -126,7 +134,11 @@ a:hover {
   font-size: 18px;
   color: #ffffff;
   padding: 13px;
-  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  background: linear-gradient(
+    to right,
+    #003366,
+    #336699
+  ); /* Gradient xanh dương đậm */
 }
 
 .search input.form-control {
@@ -140,7 +152,11 @@ a:hover {
 }
 
 .search button {
-  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  background: linear-gradient(
+    to right,
+    #003366,
+    #336699
+  ); /* Gradient xanh dương đậm */
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -328,7 +344,7 @@ a:hover {
 
 /* Overlay cho slide */
 .mega-menu-right .carousel-item::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -404,7 +420,6 @@ a:hover {
   right: -15px;
 }
 
-
 .inner-tools ul {
   list-style: none;
   display: flex;
@@ -448,6 +463,11 @@ a:hover {
   margin: 0;
   padding: 0;
 }
+
+.inner-avatar ul li a {
+  color: #fff;
+}
+
 .inner-avatar ul li img {
   margin: auto 5px;
   width: 40px;
@@ -559,7 +579,11 @@ a:hover {
 [sort="sort"] .btn-danger {
   font-size: 1rem;
   color: #fff;
-  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  background: linear-gradient(
+    to right,
+    #003366,
+    #336699
+  ); /* Gradient xanh dương đậm */
   border-color: #003366;
   padding: 8px 16px;
   white-space: nowrap;
@@ -568,7 +592,7 @@ a:hover {
 
 [sort="sort"] .btn-danger:hover {
   background: #fff;
-  color: #003366
+  color: #003366;
 }
 
 /* Product-item */
@@ -602,7 +626,11 @@ a:hover {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  background: linear-gradient(
+    to right,
+    #003366,
+    #336699
+  ); /* Gradient xanh dương đậm */
   color: #fff;
   padding: 3px 8px;
   font-weight: 600;
@@ -655,7 +683,7 @@ a:hover {
 .product-item .inner-content .inner-price-new {
   font-size: 16px;
   font-weight: 700;
-  color: 	#4f925a; /* Xanh dương đậm */
+  color: #4f925a; /* Xanh dương đậm */
 }
 
 .product-item .inner-content .inner-price-old {
@@ -676,7 +704,11 @@ a:hover {
   transition: all 0.3s ease;
 }
 .product-item .inner-content .btn-outline-success:hover {
-  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  background: linear-gradient(
+    to right,
+    #003366,
+    #336699
+  ); /* Gradient xanh dương đậm */
   color: #fff;
 }
 
@@ -702,7 +734,11 @@ a:hover {
 
 .product-detail .btn-secondary:hover {
   color: #fff;
-  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  background: linear-gradient(
+    to right,
+    #003366,
+    #336699
+  ); /* Gradient xanh dương đậm */
   border-color: #003366;
 }
 
@@ -735,7 +771,7 @@ a:hover {
 }
 
 .product-detail .inner-price-new {
-  color: 	#4f925a; /* Xanh dương đậm */
+  color: #4f925a; /* Xanh dương đậm */
   font-weight: 700;
   font-size: 28px;
   margin-bottom: 5px;
@@ -768,7 +804,11 @@ a:hover {
 
 .product-detail .inner-stock span {
   color: #fff;
-  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  background: linear-gradient(
+    to right,
+    #003366,
+    #336699
+  ); /* Gradient xanh dương đậm */
   font-weight: 600;
   padding: 4px 8px;
   border-radius: 4px;
@@ -790,7 +830,11 @@ a:hover {
 }
 
 .pagination .page-item.active .page-link {
-  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  background: linear-gradient(
+    to right,
+    #003366,
+    #336699
+  ); /* Gradient xanh dương đậm */
   color: #fff;
   border-color: #003366;
 }
@@ -1036,7 +1080,11 @@ footer .box a:hover {
 .product-categories .box-head .inner-title {
   color: #ffffff;
   padding: 12px 15px;
-  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  background: linear-gradient(
+    to right,
+    #003366,
+    #336699
+  ); /* Gradient xanh dương đậm */
   font-size: 18px;
   border-bottom: 1px solid #002244; /* Xanh dương đậm hơn */
 }
@@ -1087,7 +1135,11 @@ footer .box a:hover {
 }
 .btn-outline-primary:hover {
   color: #ffffff;
-  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  background: linear-gradient(
+    to right,
+    #003366,
+    #336699
+  ); /* Gradient xanh dương đậm */
   border-color: #003366;
 }
 
@@ -1101,21 +1153,30 @@ footer .box a:hover {
   padding: 20px;
 }
 
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
 #user-page .user-info .btn-danger {
+  position: absolute;
+  top: 40px;
+  right: 5px;
   background-color: #dc3545;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 50%;
   padding: 8px 15px;
   font-size: 14px;
+  font-weight: bold;
 }
 #user-page .user-info .btn-danger:hover {
   background-color: #c82333;
 }
 
-#loginPage {
+#loginPage,
+#registerPage {
   color: #212529;
-  max-width: 400px;
   margin: 50px auto;
   padding: 30px;
   background-color: #fff;
@@ -1124,32 +1185,41 @@ footer .box a:hover {
   box-shadow: 0 4px 10px rgba(0, 51, 102, 0.05); /* Bóng xanh dương nhẹ */
 }
 
-#loginPage h1 {
+#loginPage h1,
+#registerPage h1 {
   font-weight: bold;
   color: #003366; /* Xanh dương đậm */
   text-align: center;
   margin-bottom: 25px;
 }
 
-#loginPage .form-group label {
+#loginPage .form-group label,
+#registerPage .form-group label {
   font-weight: 600;
   margin-bottom: 5px;
 }
 
-#loginPage .form-control {
-  border: 1px solid #e6f3f3;
+#loginPage .form-control,
+#registerPage .form-control {
+  border: 3px solid #e6f3f3;
   padding: 10px 12px;
   border-radius: 4px;
 }
-#loginPage .form-control:focus {
+#loginPage .form-control:focus,
+#registerPage .form-control:focus {
   border-color: #336699; /* Xanh dương sáng */
   box-shadow: 0 0 0 0.2rem rgba(51, 102, 153, 0.25);
 }
 
-#loginPage .btn {
+#loginPage .btn,
+#registerPage .btn {
   margin-top: 20px;
   color: #fff;
-  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  background: linear-gradient(
+    to right,
+    #003366,
+    #336699
+  ); /* Gradient xanh dương đậm */
   border: 1px solid #003366;
   padding: 10px 15px;
   width: 100%;
@@ -1158,20 +1228,24 @@ footer .box a:hover {
   transition: background 0.3s, border-color 0.3s;
 }
 
-#loginPage .btn:hover {
+#loginPage .btn:hover,
+#registerPage .btn:hover {
   background: #002244;
   border-color: #003366;
 }
 
-#loginPage .d-flex {
+#loginPage .d-flex,
+#registerPage .d-flex {
   justify-content: space-between;
   margin-top: 15px;
 }
-#loginPage .d-flex a {
+#loginPage .d-flex a,
+#registerPage .d-flex a {
   color: #003366; /* Xanh dương đậm */
   font-size: 14px;
 }
-#loginPage .d-flex a:hover {
+#loginPage .d-flex a:hover,
+#registerPage .d-flex a:hover {
   text-decoration: underline;
   color: #002244; /* Xanh dương đậm hơn */
 }
@@ -1184,7 +1258,11 @@ footer .box a:hover {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  background: linear-gradient(
+    to right,
+    #003366,
+    #336699
+  ); /* Gradient xanh dương đậm */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1268,10 +1346,14 @@ footer .box a:hover {
   flex-direction: column;
   align-items: flex-end;
   margin-bottom: 15px;
-} 
+}
 
 .chat-panel .chat .inner-outgoing .inner-content {
-  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  background: linear-gradient(
+    to right,
+    #003366,
+    #336699
+  ); /* Gradient xanh dương đậm */
   color: #fff;
   padding: 8px 5px;
   border-radius: 15px 15px 0 15px;
@@ -1316,7 +1398,11 @@ footer .box a:hover {
 }
 
 .chat-panel .chat .inner-form button {
-  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  background: linear-gradient(
+    to right,
+    #003366,
+    #336699
+  ); /* Gradient xanh dương đậm */
   border: 1px solid #003366;
   border-radius: 50%;
   width: 36px;
@@ -1365,7 +1451,11 @@ footer .box a:hover {
   padding: 10px;
   font-weight: bold;
   color: #ffffff;
-  background: linear-gradient(to right, #003366, #336699); /* Gradient xanh dương đậm */
+  background: linear-gradient(
+    to right,
+    #003366,
+    #336699
+  ); /* Gradient xanh dương đậm */
 }
 
 .chat-panel .inner-head span {
