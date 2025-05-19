@@ -1,24 +1,51 @@
-
-button.circular-button(type="button" open-chat-button)#openChatBtn
-  i.fas.fa-regular.fa-comment
-#chat.chat-panel(style="display: none;")
-  .chat-content
-    .inner-head 
+.side-bar
+  // --- Nút và Panel cho Socket.IO Chat (Giữ nguyên ID cũ) ---
+  button.chat-button(type="button" open-chat-button)#openChatBtn 
+    i.fas.fa-regular.fa-comment 
+  #chat.chat-panel(style="display: none;") 
+    .chat-content
+      .inner-head
         span Admin 
-        span#closeChatBtn.close-button.text-end X
-    .chat(
-      user-info=user ? JSON.stringify(user) : '{}'
-    ) 
-      .inner-body
-        ul#messages
-      .inner-foot
-        form.inner-form(onsubmit="return false;")
-          input#messageInput.chat-input(
-            type="text"
-            placeholder="Nhập nội dung..."
-          )
-          button(type="submit")
-            i.fa-solid.fa-paper-plane
+        span#closeChatBtn.close-button.text-end X 
+      .chat(
+        user-info=user ? JSON.stringify(user) : '{}'
+      )
+        .inner-body(style="max-height: 300px; overflow-y: auto;")
+          ul#messages 
+        .inner-foot
+          form.inner-form#socket-chat-form 
+            input#messageInput.chat-input( 
+              type="text"
+              placeholder="Nhập nội dung..."
+              autocomplete="off"
+            )
+            button(type="submit")
+              i.fa-solid.fa-paper-plane
 
-script(src="/socket.io/socket.io.js")
-script(src="/js/chat-panel.js")
+  // --- Nút và Panel cho Gemini Chat (ID mới) ---
+  button.chat-button(type="button")#openGeminiChatBtn 
+    i.fas.fa-solid.fa-robot 
+  #gemini-chat.chat-panel(style="display: none;") 
+    .chat-content
+      .inner-head
+        span Trợ lý AI Nhà thuốc 
+        span#closeGeminiChatBtn.close-button.text-end X 
+      .chat
+        //- user-info không cần thiết lắm cho Gemini
+        .inner-body(style="max-height: 300px; overflow-y: auto;") 
+          ul#gemini-messages 
+        .inner-foot
+          form.inner-form#gemini-chat-form 
+            input#gemini-messageInput.chat-input( 
+              type="text"
+              placeholder="Hỏi trợ lý AI..."
+              autocomplete="off"
+              required
+            )
+            button(type="submit")
+              i.fa-solid.fa-paper-plane
+              //- span.spinner-border.spinner-border-sm.ms-2.d-none(role="status", aria-hidden="true") // Spinner nếu muốn
+
+script(src="/socket.io/socket.io.js") 
+script(src="/js/chat-panel.js")      
+script(src="/js/chat.js") 
